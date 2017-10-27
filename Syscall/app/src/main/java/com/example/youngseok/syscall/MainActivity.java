@@ -189,12 +189,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         colorList.add(new Color("흰색", R.drawable.white));
         colorList.add(new Color("회색", R.drawable.gray));
         colorList.add(new Color("빨강", R.drawable.red));
+        colorList.add(new Color("주황", R.drawable.orange));
         colorList.add(new Color("파랑", R.drawable.blue));
         colorList.add(new Color("보라", R.drawable.violet));
         colorList.add(new Color("분홍", R.drawable.pink));
         colorList.add(new Color("초록", R.drawable.green));
         colorList.add(new Color("노랑", R.drawable.yellow));
-        colorList.add(new Color("주황", R.drawable.orange));
         colorList.add(new Color("갈색", R.drawable.brown));
     }
 
