@@ -42,4 +42,10 @@ public class UserDBManager extends SQLiteOpenHelper {
         Log.d("SQL", "<Brand : " + brand + "> <Classification : " + classification + "> <Color : " + color + "> <Start Driver : " + startDriver + "> <Ordinary Eye Size : " + ordinaryEyeSize + "> <Sleepy Eye Size : " + sleepyEyeSize + ">");
         db.close();
     }
+
+    public void delete() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM user");
+        db.close();
+    }
 }

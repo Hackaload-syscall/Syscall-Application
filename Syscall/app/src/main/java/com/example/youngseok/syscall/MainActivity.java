@@ -1,6 +1,7 @@
 package com.example.youngseok.syscall;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String androidID, brand, classification, color;
     int isStartDriver = 0;
 
+    boolean isEnroll = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,18 +44,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         makeColorList();
 
         TextView textViewAndroidID = (TextView) findViewById(R.id.textView_androidID);
+        TextView textViewIsEnroll = (TextView) findViewById(R.id.textview_isEnroll);
 
         Spinner spinnerBrand = (Spinner) findViewById(R.id.spinner_brand);
         Spinner spinnerClassification = (Spinner) findViewById(R.id.spinner_classification);
         Spinner spinnerColor = (Spinner) findViewById(R.id.spinner_color);
 
         Button buttonHelp = (Button) findViewById(R.id.button_help);
+        Button buttonCamera = (Button) findViewById(R.id.button_camera);
         Button buttonEnroll = (Button) findViewById(R.id.button_enroll);
         Button buttonNext = (Button) findViewById(R.id.button_next);
 
         CheckBox checkBoxStarter = (CheckBox) findViewById(R.id.checkbox_starter);
 
         textViewAndroidID.setText(androidID);
+
+        if(isEnroll) {
+            textViewIsEnroll.setText("등록");
+        } else {
+            textViewIsEnroll.setText("미등록");
+        }
 
         brandSpinnerAdapter = new BrandSpinnerAdapter(this, brandList);
         classificationSpinnerAdapter = new ClassificationSpinnerAdapter(this, classificationList);
@@ -63,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         spinnerColor.setAdapter(colorSpinnerAdapter);
 
         buttonHelp.setOnClickListener(this);
+        buttonCamera.setOnClickListener(this);
         buttonEnroll.setOnClickListener(this);
         buttonNext.setOnClickListener(this);
 
@@ -109,6 +121,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onClick(View view) {
+        Intent intent;
+
         switch(view.getId()) {
             case R.id.button_help:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -127,6 +141,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 alertDialog.show();
 
+                break;
+
+            case R.id.button_camera:
+                intent = new Intent(getApplicationContext(), CameraActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.button_enroll:

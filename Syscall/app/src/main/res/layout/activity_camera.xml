@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_camera"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textview_command"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
+        android:text="표시된 영역에 눈을 맞춰주세요."
+        android:gravity="center_vertical|center_horizontal"/>
+
+    <SurfaceView
+        android:id="@+id/surfaceview_camera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/textview_complete"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
+        android:text="완료" />
+
+</LinearLayout>
