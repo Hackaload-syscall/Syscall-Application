@@ -67,7 +67,7 @@ public class CameraActivity extends AppCompatActivity {
     public void startCamera() {
 
         if(preview == null) {
-            preview = new Preview(this, (SurfaceView) findViewById(R.id.surfaceview_camera));
+            preview = new Preview(this, (SurfaceView) findViewById(R.id.surfaceView_camera));
             preview.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             ((LinearLayout) findViewById(R.id.layout_camera)).addView(preview);
             preview.setKeepScreenOn(true);

@@ -152,6 +152,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 userDBManager.insert(brand, classification, color, isStartDriver, 0, 0);
                 break;
 
+            case R.id.button_next:
+                intent = new Intent(getApplicationContext(), RunActivity.class);
+                startActivity(intent);
+                break;
+
             default:
                 break;
         }
