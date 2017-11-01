@@ -1,214 +1,244 @@
 package com.example.youngseok.syscall;
-
-import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.hardware.Camera;
-import android.net.Uri;
+import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.os.Environment;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Surface;
 import android.view.SurfaceView;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.view.WindowManager;
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.CameraBridgeViewBase;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 
-public class CameraActivity extends AppCompatActivity {
-    Preview preview;
-    Camera camera;
-    Context context;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
-    private final static int PERMISSIONS_REQUEST_CODE = 100;
-    private final static int CAMERA_FACING = Camera.CameraInfo.CAMERA_FACING_FRONT;
-    private AppCompatActivity mActivity;
+public class CameraActivity extends AppCompatActivity
+        implements CameraBridgeViewBase.CvCameraViewListener2 {
 
-    public static void doRestart(Context c) {
+    private static final String TAG = "opencv";
+    private CameraBridgeViewBase mOpenCvCameraView;
+    private Mat matInput;
+    private Mat matResult;
+
+    public native void ConvertRGBA(long matAddrInput, long matAddrResult);
+    public static native long loadCascade(String cascadeFileName );
+    public static native void detect(long cascadeClassifier_face,
+                                     long cascadeClassifier_eye, long matAddrInput, long matAddrResult);
+    public long cascadeClassifier_face = 0;
+    public long cascadeClassifier_eye = 0;
+
+    static {
+        System.loadLibrary("opencv_java3");
+        System.loadLibrary("native-lib");
+    }
+
+    private void copyFile(String filename) {
+        String baseDir = Environment.getExternalStorageDirectory().getPath();
+        String pathDir = baseDir + File.separator + filename;
+
+        AssetManager assetManager = this.getAssets();
+
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+
         try {
-            if (c != null) {
-                PackageManager pm = c.getPackageManager();
-                if (pm != null) {
-                    Intent mStartActivity = pm.getLaunchIntentForPackage(c.getPackageName());
-                    if (mStartActivity != null) {
-                        mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            Log.d( TAG, "copyFile :: 다음 경로로 파일복사 "+ pathDir);
+            inputStream = assetManager.open(filename);
+            outputStream = new FileOutputStream(pathDir);
 
-                        int mPendingIntentId = 223344;
-                        PendingIntent mPendingIntent = PendingIntent.getActivity(c, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
-                        AlarmManager mgr = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
-                        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
-                        System.exit(0);
-
-                    } else {
-                        Log.e("TAG", "Was not able to restart application, mStartActivity null");
-                    }
-                } else {
-                    Log.e("TAG", "Was not able to restart application, PM null");
-                }
-            } else {
-                Log.e("TAG", "Was not able to restart application, Context null");
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, read);
             }
-        } catch (Exception ex) {
-            Log.e("TAG", "Was not able to restart application");
+            inputStream.close();
+            inputStream = null;
+            outputStream.flush();
+            outputStream.close();
+            outputStream = null;
+        } catch (Exception e) {
+            Log.d(TAG, "copyFile :: 파일 복사 중 예외 발생 "+e.toString() );
         }
+
     }
 
-    public void startCamera() {
+    private void read_cascade_file(){
+        copyFile("haarcascade_frontalface_alt.xml");
+        copyFile("haarcascade_eye_tree_eyeglasses.xml");
 
-        if(preview == null) {
-            preview = new Preview(this, (SurfaceView) findViewById(R.id.surfaceView_camera));
-            preview.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            ((LinearLayout) findViewById(R.id.layout_camera)).addView(preview);
-            preview.setKeepScreenOn(true);
-        }
+        Log.d(TAG, "read_cascade_file:");
 
-        preview.setCamera(null);
-        if(camera != null) {
-            camera.release();
-            camera = null;
-        }
+        cascadeClassifier_face = loadCascade( "haarcascade_frontalface_alt.xml");
+        Log.d(TAG, "read_cascade_file:");
 
-        int numCams = Camera.getNumberOfCameras();
-        if(numCams > 0) {
-            try {
-                camera = Camera.open(CAMERA_FACING);
-                camera.setDisplayOrientation(setCameraDisplayOrientation(this, CAMERA_FACING, camera));
-                Camera.Parameters params = camera.getParameters();
-                params.setRotation(setCameraDisplayOrientation(this, CAMERA_FACING, camera));
-                camera.startPreview();
-            } catch (RuntimeException ex) {
-                Toast.makeText(context, "camera_not_found " + ex.getMessage().toString(), Toast.LENGTH_LONG).show();
-                Log.d("TAG", "camera_not_found " + ex.getMessage().toString());
+        cascadeClassifier_eye = loadCascade( "haarcascade_eye_tree_eyeglasses.xml");
+    }
+
+    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
+        @Override
+        public void onManagerConnected(int status) {
+            switch (status) {
+                case LoaderCallbackInterface.SUCCESS:
+                {
+                    mOpenCvCameraView.enableView();
+                } break;
+                default:
+                {
+                    super.onManagerConnected(status);
+                } break;
             }
         }
+    };
 
-        preview.setCamera(camera);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_camera);
 
-        if(getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { //API 23 이상이면 런타임 퍼미션 처리 필요
-                int hasCameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-                int hasWriteExternalStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-                if (hasCameraPermission == PackageManager.PERMISSION_GRANTED && hasWriteExternalStoragePermission==PackageManager.PERMISSION_GRANTED){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-                } else {
-                    ActivityCompat.requestPermissions( this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_CODE);
-                }
+            if (!hasPermissions(PERMISSIONS)) {
+
+                requestPermissions(PERMISSIONS, PERMISSIONS_REQUEST_CODE);
             }
+            else  read_cascade_file(); //추가
         }
+
+        mOpenCvCameraView = (CameraBridgeViewBase)findViewById(R.id.activity_surface_view);
+        mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
+        mOpenCvCameraView.setCvCameraViewListener(this);
+        mOpenCvCameraView.setCameraIndex(1); // front-camera(1),  back-camera(0)
+        mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
     }
 
     @Override
-    protected void onResume() {
+    public void onPause()
+    {
+        super.onPause();
+        if (mOpenCvCameraView != null)
+            mOpenCvCameraView.disableView();
+    }
+
+    @Override
+    public void onResume()
+    {
         super.onResume();
 
-        startCamera();
+        if (!OpenCVLoader.initDebug()) {
+            Log.d(TAG, "onResume :: Internal OpenCV library not found.");
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_2_0, this, mLoaderCallback);
+        } else {
+            Log.d(TAG, "onResum :: OpenCV library found inside package. Using it!");
+            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+        }
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (mOpenCvCameraView != null)
+            mOpenCvCameraView.disableView();
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-
-        // Surface will be destroyed when we return, so stop the preview.
-        if(camera != null) {
-            // Call stopPreview() to stop updating the preview surface
-            camera.stopPreview();
-            preview.setCamera(null);
-            camera.release();
-            camera = null;
-        }
-
-        ((LinearLayout) findViewById(R.id.layout_camera)).removeView(preview);
-        preview = null;
+    public void onCameraViewStarted(int width, int height) {
 
     }
 
-    public static int setCameraDisplayOrientation(Activity activity, int cameraId, android.hardware.Camera camera) {
-        android.hardware.Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
-        android.hardware.Camera.getCameraInfo(cameraId, info);
-        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
-        int degrees = 0;
-        switch(rotation) {
-            case Surface.ROTATION_0: degrees = 0; break;
-            case Surface.ROTATION_90: degrees = 90; break;
-            case Surface.ROTATION_180: degrees = 180; break;
-            case Surface.ROTATION_270: degrees = 270; break;
-        }
+    @Override
+    public void onCameraViewStopped() {
 
+    }
+
+    @Override
+    public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
+
+        matInput = inputFrame.rgba();
+
+        if ( matResult != null ) matResult.release();
+        //Log.d(TAG, matInput.rows() + " " + matInput.cols());
+        matResult = new Mat(matInput.rows(), matInput.cols(), matInput.type());
+//        ConvertRGBA(matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
+        Mat matInputT = new Mat(matInput.rows(), matInput.cols(), matInput.type());
+        Mat matInputF = new Mat(matInput.rows(), matInput.cols(), matInput.type());
+
+        Core.transpose(matInput, matInputT);
+        Imgproc.resize(matInputT, matInputF, matInputF.size(), 0, 0, 0);
+//        Core.flip(matResultF, matResult, -1);
+        Core.flip(matInputF, matInput, -1);
+
+        detect(cascadeClassifier_face,cascadeClassifier_eye, matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
+        return matResult;
+    }
+
+
+    static final int PERMISSIONS_REQUEST_CODE = 1000;
+    //String[] PERMISSIONS  = {"android.permission.CAMERA"};
+    String[] PERMISSIONS  = {"android.permission.CAMERA",
+            "android.permission.WRITE_EXTERNAL_STORAGE"};
+
+    private boolean hasPermissions(String[] permissions) {
         int result;
-        if(info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-            result = (info.orientation + degrees) % 360;
-            result = (360 - result) % 360;  // compensate the mirror
-        } else {  // back-facing
-            result = (info.orientation - degrees + 360) % 360;
-        }
 
-        return result;
-    }
+        for (String perms : permissions){
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grandResults) {
-        if(requestCode == PERMISSIONS_REQUEST_CODE && grandResults.length > 0) {
+            result = ContextCompat.checkSelfPermission(this, perms);
 
-            int hasCameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-            int hasWriteExternalStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (result == PackageManager.PERMISSION_DENIED){
 
-            if(hasCameraPermission == PackageManager.PERMISSION_GRANTED && hasWriteExternalStoragePermission == PackageManager.PERMISSION_GRANTED ){
-                doRestart(this);
-            } else {
-                checkPermissions();
+                return false;
             }
         }
 
+        return true;
     }
 
 
-    @TargetApi(Build.VERSION_CODES.M)
-    private void checkPermissions() {
-        int hasCameraPermission = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA);
-        int hasWriteExternalStoragePermission =
-                ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-        boolean cameraRationale = ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.CAMERA);
-        boolean writeExternalStorageRationale =
-                ActivityCompat.shouldShowRequestPermissionRationale(this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        switch(requestCode){
 
-        if ( (hasCameraPermission == PackageManager.PERMISSION_DENIED && cameraRationale)
-                || (hasWriteExternalStoragePermission== PackageManager.PERMISSION_DENIED
-                && writeExternalStorageRationale))
-            showDialogForPermission("앱을 실행하려면 퍼미션을 허가하셔야합니다.");
+            case PERMISSIONS_REQUEST_CODE:
+                if (grantResults.length > 0) {
+                    boolean cameraPermissionAccepted = grantResults[0]
+                            == PackageManager.PERMISSION_GRANTED;
 
-        else if ( (hasCameraPermission == PackageManager.PERMISSION_DENIED && !cameraRationale)
-                || (hasWriteExternalStoragePermission== PackageManager.PERMISSION_DENIED
-                && !writeExternalStorageRationale))
-            showDialogForPermissionSetting("퍼미션 거부 + Don't ask again(다시 묻지 않음) " +
-                    "체크 박스를 설정한 경우로 설정에서 퍼미션 허가해야합니다.");
+                    boolean writePermissionAccepted = grantResults[1]
+                            == PackageManager.PERMISSION_GRANTED;
 
-        else if ( hasCameraPermission == PackageManager.PERMISSION_GRANTED
-                || hasWriteExternalStoragePermission== PackageManager.PERMISSION_GRANTED ) {
-            doRestart(this);
+                    if (!cameraPermissionAccepted || !writePermissionAccepted) {
+                        showDialogForPermission("앱을 실행하려면 퍼미션을 허가하셔야합니다.");
+                        return;
+                    }else
+                    {
+                        read_cascade_file();
+                    }
+                }
+                break;
         }
     }
 
@@ -216,45 +246,17 @@ public class CameraActivity extends AppCompatActivity {
     @TargetApi(Build.VERSION_CODES.M)
     private void showDialogForPermission(String msg) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity.this);
-        builder.setTitle("알림");
+        AlertDialog.Builder builder = new AlertDialog.Builder( CameraActivity.this);
+        builder.setTitle("Alert");
         builder.setMessage(msg);
         builder.setCancelable(false);
-        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                //퍼미션 요청
-                ActivityCompat.requestPermissions(CameraActivity.this,
-                        new String[]{Manifest.permission.CAMERA,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        PERMISSIONS_REQUEST_CODE);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id){
+                requestPermissions(PERMISSIONS, PERMISSIONS_REQUEST_CODE);
             }
         });
-
-        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                finish();
-            }
-        });
-        builder.create().show();
-    }
-
-    private void showDialogForPermissionSetting(String msg) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity.this);
-        builder.setTitle("알림");
-        builder.setMessage(msg);
-        builder.setCancelable(true);
-        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-
-                Intent myAppSettings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + mActivity.getPackageName()));
-                myAppSettings.addCategory(Intent.CATEGORY_DEFAULT);
-                myAppSettings.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mActivity.startActivity(myAppSettings);
-            }
-        });
-        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
                 finish();
             }
         });

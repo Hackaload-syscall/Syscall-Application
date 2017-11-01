@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout_camera"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context=".CameraActivity" >
 
+    <org.opencv.android.JavaCameraView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/activity_surface_view" />
     <TextView
-        android:id="@+id/textview_command"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="6"
-        android:text="표시된 영역에 눈을 맞춰주세요."
-        android:gravity="center_vertical|center_horizontal"/>
-
-    <SurfaceView
-        android:id="@+id/surfaceView_camera"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="카메라를 똑바로 봐주세요."
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:id="@+id/textview_see_front"
+        android:textAlignment="center"/>
+    <TextView
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"/>
-
-    <Button
-        android:id="@+id/textview_complete"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="6"
-        android:text="완료" />
-
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:textColor="#FFFFFF"
+        android:text="0%"
+        android:id="@+id/textview_percent"/>
+</FrameLayout>
