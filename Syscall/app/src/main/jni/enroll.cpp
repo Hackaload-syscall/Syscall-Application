@@ -12,9 +12,15 @@
 using namespace cv;
 using namespace std;
 
+#define EYE_DETECTION_CODE_SUCCESS 1
+#define EYE_DETECTION_CODE_FACE_ERROR 2
+#define EYE_DETECTION_CODE_EYE_ERROR 3
+
+float eye_radius;
+
 extern "C" {
 JNIEXPORT void JNICALL
-Java_com_example_youngseok_syscall_CameraActivity_ConvertRGBA(JNIEnv *env, jobject instance,
+Java_com_example_youngseok_syscall_CamersaActivity_ConvertRGBA(JNIEnv *env, jobject instance,
                                                               jlong matAddrInput,
                                                               jlong matAddrResult) {
     Mat &matInput = *(Mat *) matAddrInput;
@@ -60,7 +66,7 @@ float resize(Mat img_src, Mat &img_resize, int resize_width) {
 }
 
 
-JNIEXPORT void JNICALL
+JNIEXPORT jint JNICALL
 Java_com_example_youngseok_syscall_CameraActivity_detect(JNIEnv *env, jclass type,
                                                              jlong cascadeClassifier_face,
                                                              jlong cascadeClassifier_eye,
@@ -88,7 +94,7 @@ Java_com_example_youngseok_syscall_CameraActivity_detect(JNIEnv *env, jclass typ
 
     __android_log_print(ANDROID_LOG_DEBUG, (char *) "native-lib :: ",
                         (char *) "face %d found ", faces.size());
-
+    if(faces.size() == 0) return EYE_DETECTION_CODE_FACE_ERROR;
     for (int i = 0; i < faces.size(); i++) {
         double real_facesize_x = faces[i].x / resizeRatio;
         double real_facesize_y = faces[i].y / resizeRatio;
@@ -110,14 +116,21 @@ Java_com_example_youngseok_syscall_CameraActivity_detect(JNIEnv *env, jclass typ
         ((CascadeClassifier *) cascadeClassifier_eye)->detectMultiScale(faceROI, eyes, 1.1, 2,
                                                                         0 | CASCADE_SCALE_IMAGE,
                                                                         Size(30, 30));
-
+        if(eyes.size() == 0) return EYE_DETECTION_CODE_EYE_ERROR;
         for (size_t j = 0; j < eyes.size(); j++) {
             Point eye_center(real_facesize_x + eyes[j].x + eyes[j].width / 2,
                              real_facesize_y + eyes[j].y + eyes[j].height / 2);
             int radius = cvRound((eyes[j].width + eyes[j].height) * 0.25);
             circle(img_result, eye_center, radius, Scalar(255, 0, 0), 30, 8, 0);
         }
+        if(eyes.size() == 2 && abs(eyes[0].y - eyes[1].y) < 10) {
+            return EYE_DETECTION_CODE_SUCCESS;
+        }
     }
+}
+JNIEXPORT jfloat JNICALL
+Java_com_example_youngseok_syscall_CameraActivity_getEyeRadius() {
+    return eye_radius;
 }
 
 }

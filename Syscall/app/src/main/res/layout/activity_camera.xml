@@ -19,6 +19,7 @@
         android:id="@+id/textview_see_front"
         android:textAlignment="center"/>
     <TextView
+        android:id="@+id/textview_percent"
         android:layout_gravity="bottom"
         android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
@@ -27,5 +28,5 @@
         android:textSize="40sp"
         android:textColor="#FFFFFF"
         android:text="0%"
-        android:id="@+id/textview_percent"/>
+        />
 </FrameLayout>

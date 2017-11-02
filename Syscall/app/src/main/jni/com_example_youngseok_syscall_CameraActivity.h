@@ -14,18 +14,21 @@ extern "C" {
  * Method:    ConvertRGBtoGray
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_example_youngseok_syscall_CameraActivity_ConvertRGBtoRGBA
+JNIEXPORT void JNICALL Java_com_example_youngseok_syscall_CameraActivity_ConvertRGBA
   (JNIEnv *, jobject, jlong, jlong);
 JNIEXPORT jlong JNICALL
 Java_com_example_youngseok_syscall_CameraActivity_loadCascade(JNIEnv *env, jclass type,
                                                                   jstring cascadeFileName_);
 
-JNIEXPORT void JNICALL
+JNIEXPORT jint JNICALL
 Java_com_example_youngseok_syscall_CameraActivity_detect(JNIEnv *env, jclass type,
                                                              jlong cascadeClassifier_face,
                                                              jlong cascadeClassifier_eye,
                                                              jlong matAddrInput,
                                                              jlong matAddrResult);
+
+JNIEXPORT jfloat JNICALL
+Java_com_example_youngseok_syscall_CameraActivity_getEyeRadius();
 #ifdef __cplusplus
 }
 #endif

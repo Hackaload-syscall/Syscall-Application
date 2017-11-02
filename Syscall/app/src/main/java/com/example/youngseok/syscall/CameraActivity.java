@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.WindowManager;
+import android.widget.TextView;
+
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.LoaderCallbackInterface;
@@ -33,13 +35,23 @@ public class CameraActivity extends AppCompatActivity
     private CameraBridgeViewBase mOpenCvCameraView;
     private Mat matInput;
     private Mat matResult;
-
+    private final int EYE_DETECTION_CODE_SUCCESS = 1;
+    private final int EYE_DETECTION_CODE_FACE_ERROR = 2;
+    private final int EYE_DETECTION_CODE_EYE_ERROR = 3;
     public native void ConvertRGBA(long matAddrInput, long matAddrResult);
     public static native long loadCascade(String cascadeFileName );
-    public static native void detect(long cascadeClassifier_face,
+    public static native int detect(long cascadeClassifier_face,
                                      long cascadeClassifier_eye, long matAddrInput, long matAddrResult);
+    public static native float getEyeRadius();
     public long cascadeClassifier_face = 0;
     public long cascadeClassifier_eye = 0;
+
+    /* implementation */
+    private float completionRate = 0;
+    private final int NUMBER_OF_DETECTION = 100;
+    private float eye_radius = 0;
+    /* Android UI */
+    public TextView tv_Percent = null;
 
     static {
         System.loadLibrary("opencv_java3");
@@ -108,6 +120,7 @@ public class CameraActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        tv_Percent = (TextView) findViewById(R.id.text);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -176,7 +189,6 @@ public class CameraActivity extends AppCompatActivity
         matInput = inputFrame.rgba();
 
         if ( matResult != null ) matResult.release();
-        //Log.d(TAG, matInput.rows() + " " + matInput.cols());
         matResult = new Mat(matInput.rows(), matInput.cols(), matInput.type());
 //        ConvertRGBA(matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
         Mat matInputT = new Mat(matInput.rows(), matInput.cols(), matInput.type());
@@ -184,10 +196,25 @@ public class CameraActivity extends AppCompatActivity
 
         Core.transpose(matInput, matInputT);
         Imgproc.resize(matInputT, matInputF, matInputF.size(), 0, 0, 0);
-//        Core.flip(matResultF, matResult, -1);
         Core.flip(matInputF, matInput, -1);
 
-        detect(cascadeClassifier_face,cascadeClassifier_eye, matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
+        int result_code = detect(cascadeClassifier_face,cascadeClassifier_eye, matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
+        switch(result_code) {
+            case EYE_DETECTION_CODE_SUCCESS :
+                completionRate += 1 / NUMBER_OF_DETECTION * 100;
+                if(completionRate > 100) completionRate = 100;
+                String temp = String.valueOf(completionRate).concat("%");
+                tv_Percent.setText(temp);
+                break;
+            case EYE_DETECTION_CODE_FACE_ERROR :
+                break;
+            case EYE_DETECTION_CODE_EYE_ERROR :
+                break;
+        }
+        if(completionRate == 100) {
+            eye_radius = getEyeRadius() / NUMBER_OF_DETECTION;
+            finish();
+        }
         return matResult;
     }
 
