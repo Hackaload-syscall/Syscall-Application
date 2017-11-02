@@ -94,7 +94,8 @@ Java_com_example_youngseok_syscall_CameraActivity_detect(JNIEnv *env, jclass typ
 
     __android_log_print(ANDROID_LOG_DEBUG, (char *) "native-lib :: ",
                         (char *) "face %d found ", faces.size());
-    if(faces.size() == 0) return EYE_DETECTION_CODE_FACE_ERROR;
+    int result = EYE_DETECTION_CODE_FACE_ERROR;
+    if(faces.size() == 0) return result;
     for (int i = 0; i < faces.size(); i++) {
         double real_facesize_x = faces[i].x / resizeRatio;
         double real_facesize_y = faces[i].y / resizeRatio;
@@ -116,16 +117,27 @@ Java_com_example_youngseok_syscall_CameraActivity_detect(JNIEnv *env, jclass typ
         ((CascadeClassifier *) cascadeClassifier_eye)->detectMultiScale(faceROI, eyes, 1.1, 2,
                                                                         0 | CASCADE_SCALE_IMAGE,
                                                                         Size(30, 30));
-        if(eyes.size() == 0) return EYE_DETECTION_CODE_EYE_ERROR;
+        result = EYE_DETECTION_CODE_EYE_ERROR;
+        if(eyes.size() == 0) return result;
         for (size_t j = 0; j < eyes.size(); j++) {
             Point eye_center(real_facesize_x + eyes[j].x + eyes[j].width / 2,
                              real_facesize_y + eyes[j].y + eyes[j].height / 2);
             int radius = cvRound((eyes[j].width + eyes[j].height) * 0.25);
             circle(img_result, eye_center, radius, Scalar(255, 0, 0), 30, 8, 0);
         }
-        if(eyes.size() == 2 && abs(eyes[0].y - eyes[1].y) < 10) {
-            return EYE_DETECTION_CODE_SUCCESS;
+        __android_log_print(ANDROID_LOG_DEBUG, (char *) "native-lib :: ",
+                            (char *) "eye %d found ", eyes.size());
+        if(eyes.size() == 2) {
+            float abs_y_value = eyes[0].y - eyes[1].y;
+            if(abs_y_value < 0)
+                abs_y_value *= -1;
+            if(abs_y_value < 10) {
+                eye_radius += ((eyes[0].width + eyes[0].height) * 0.25 + (eyes[1].width + eyes[1].height * 0.25)) / 2;
+                result = EYE_DETECTION_CODE_SUCCESS;
+                return result;
+            }
         }
+        return EYE_DETECTION_CODE_EYE_ERROR;
     }
 }
 JNIEXPORT jfloat JNICALL

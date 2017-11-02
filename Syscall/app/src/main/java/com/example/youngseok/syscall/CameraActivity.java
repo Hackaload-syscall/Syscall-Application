@@ -1,6 +1,7 @@
 package com.example.youngseok.syscall;
 import android.annotation.TargetApi;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.Build;
@@ -48,8 +49,8 @@ public class CameraActivity extends AppCompatActivity
 
     /* implementation */
     private float completionRate = 0;
-    private final int NUMBER_OF_DETECTION = 100;
-    private float eye_radius = 0;
+    private final int NUMBER_OF_DETECTION = 200;
+    public static float eye_radius = 0;
     /* Android UI */
     public TextView tv_Percent = null;
     public TextView tv_SeeFront = null;
@@ -120,13 +121,12 @@ public class CameraActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        tv_Percent = (TextView) findViewById(R.id.text);
-
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_camera);
-
+        tv_Percent = (TextView) findViewById(R.id.textview_percent);
+        tv_SeeFront = (TextView) findViewById(R.id.textview_see_front);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
@@ -201,10 +201,15 @@ public class CameraActivity extends AppCompatActivity
         int result_code = detect(cascadeClassifier_face,cascadeClassifier_eye, matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
         switch(result_code) {
             case EYE_DETECTION_CODE_SUCCESS :
-                completionRate += 1 / NUMBER_OF_DETECTION * 100;
+                completionRate += 3;
+                Log.d(TAG, " " + completionRate);
                 if(completionRate > 100) completionRate = 100;
-                String temp = String.valueOf(completionRate).concat("%");
-                tv_Percent.setText(temp);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tv_Percent.setText(String.valueOf(completionRate).concat("%"));
+                    }
+                });
                 break;
             case EYE_DETECTION_CODE_FACE_ERROR :
                 break;
@@ -212,8 +217,10 @@ public class CameraActivity extends AppCompatActivity
                 break;
         }
         if(completionRate == 100) {
-            eye_radius = getEyeRadius() / NUMBER_OF_DETECTION;
-            finish();
+            eye_radius = getEyeRadius() / 34;
+            Log.d(TAG, "eye radius : "+ eye_radius);
+            completionRate = 0;
+            finish()z
         }
         return matResult;
     }

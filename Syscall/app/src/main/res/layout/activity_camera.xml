@@ -10,13 +10,13 @@
         android:layout_height="match_parent"
         android:id="@+id/activity_surface_view" />
     <TextView
+        android:id="@+id/textview_see_front"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:text="카메라를 똑바로 봐주세요."
         android:textSize="20sp"
         android:textColor="#FFFFFF"
-        android:id="@+id/textview_see_front"
         android:textAlignment="center"/>
     <TextView
         android:id="@+id/textview_percent"
@@ -27,6 +27,6 @@
         android:textAlignment="center"
         android:textSize="40sp"
         android:textColor="#FFFFFF"
-        android:text="0%"
+        android:text="0.0%"
         />
 </FrameLayout>
