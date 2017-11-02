@@ -220,7 +220,7 @@ public class CameraActivity extends AppCompatActivity
             eye_radius = getEyeRadius() / 34;
             Log.d(TAG, "eye radius : "+ eye_radius);
             completionRate = 0;
-            finish()z
+            finish();
         }
         return matResult;
     }

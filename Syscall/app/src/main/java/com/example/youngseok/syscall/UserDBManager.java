@@ -13,14 +13,7 @@ public class UserDBManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE user " +
-                    "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "brand TEXT, " +
-                    "classification TEXT, " +
-                    "color TEXT, " +
-                    "startDriver INTEGER, " +
-                    "ordinaryEyeSize REAL, " +
-                    "sleepyEyeSize REAL);");
+        db.execSQL("CREATE TABLE USER (serverID INTEGER PRIMARY KEY, eyeSize REAL);");
     }
 
     @Override
@@ -28,24 +21,17 @@ public class UserDBManager extends SQLiteOpenHelper {
 
     }
 
-    public void insert(String brand, String classification, String color, int startDriver, float ordinaryEyeSize, float sleepyEyeSize) {
+    public void insert(int serverID, float eyeSize) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO user " +
-                    "VALUES (NULL, '" +
-                    brand + "', '" +
-                    classification + "', '" +
-                    color + "', " +
-                    startDriver + ", " +
-                    ordinaryEyeSize + ", " +
-                    sleepyEyeSize + ");");
+        db.execSQL("INSERT INTO USER VALUES ( " + serverID + ", " + eyeSize + ");");
 
-        Log.d("SQL", "<Brand : " + brand + "> <Classification : " + classification + "> <Color : " + color + "> <Start Driver : " + startDriver + "> <Ordinary Eye Size : " + ordinaryEyeSize + "> <Sleepy Eye Size : " + sleepyEyeSize + ">");
+        Log.d("DB Insert", "<serverID : " + serverID + "> <eyeSize : " + eyeSize + ">");
         db.close();
     }
 
     public void delete() {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM user");
+        db.execSQL("DELETE FROM USER");
         db.close();
     }
 }

@@ -1,29 +1,29 @@
 {
   "buildFiles": [
-    "C:\\Users\\Hwancheol\\Desktop\\Syscall-Application\\Syscall\\app\\src\\main\\jni\\Android.mk",
-    "C:\\Users\\Hwancheol\\Desktop\\Syscall-Application\\Syscall\\app\\src\\main\\jni\\Application.mk"
+    "/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni/Android.mk",
+    "/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni/Application.mk"
   ],
   "cleanCommands": [
-    "C:\\Users\\Hwancheol\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\Hwancheol\\Desktop\\Syscall-Application\\Syscall\\app\\src\\main\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\Hwancheol\\Desktop\\Syscall-Application\\Syscall\\app\\src\\main\\jni\\Application.mk APP_ABI\u003darmeabi NDK_ALL_ABIS\u003darmeabi NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-23 NDK_OUT\u003dC:/Users/Hwancheol/Desktop/Syscall-Application/Syscall/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\Hwancheol\\Desktop\\Syscall-Application\\Syscall\\app\\build\\intermediates\\ndkBuild\\release\\lib clean"
+    "/Users/youngseok/Library/Android/sdk/ndk-bundle/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni/Application.mk APP_ABI\u003darmeabi NDK_ALL_ABIS\u003darmeabi NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-23 NDK_OUT\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/build/intermediates/ndkBuild/release/lib clean"
   ],
   "libraries": {
     "native-lib-release-armeabi": {
-      "buildCommand": "C:\\Users\\Hwancheol\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\Hwancheol\\Desktop\\Syscall-Application\\Syscall\\app\\src\\main\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\Hwancheol\\Desktop\\Syscall-Application\\Syscall\\app\\src\\main\\jni\\Application.mk APP_ABI\u003darmeabi NDK_ALL_ABIS\u003darmeabi NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-23 NDK_OUT\u003dC:/Users/Hwancheol/Desktop/Syscall-Application/Syscall/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\Hwancheol\\Desktop\\Syscall-Application\\Syscall\\app\\build\\intermediates\\ndkBuild\\release\\lib C:/Users/Hwancheol/Desktop/Syscall-Application/Syscall/app/build/intermediates/ndkBuild/release/obj/local/armeabi/libnative-lib.so",
+      "buildCommand": "/Users/youngseok/Library/Android/sdk/ndk-bundle/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni/Application.mk APP_ABI\u003darmeabi NDK_ALL_ABIS\u003darmeabi NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-23 NDK_OUT\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/build/intermediates/ndkBuild/release/lib /Users/youngseok/Desktop/Hyundai/Syscall/app/build/intermediates/ndkBuild/release/obj/local/armeabi/libnative-lib.so",
       "toolchain": "toolchain-armeabi",
       "abi": "armeabi",
       "artifactName": "native-lib",
       "files": [
         {
-          "src": "C:\\Users\\Hwancheol\\Desktop\\Syscall-Application\\Syscall\\app\\src\\main\\jni\\enroll.cpp",
-          "flags": "\"-gcc-toolchain\" \"C:/Users/Hwancheol/AppData/Local/Android/sdk/ndk-bundle/build//../toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64\" \"-fpic\" \"-ffunction-sections\" \"-funwind-tables\" \"-fstack-protector-strong\" \"-Wno-invalid-command-line-argument\" \"-Wno-unused-command-line-argument\" \"-no-canonical-prefixes\" \"-fno-integrated-as\" \"-g\" \"-target\" \"armv5te-none-linux-androideabi23\" \"-march\u003darmv5te\" \"-mtune\u003dxscale\" \"-msoft-float\" \"-fno-exceptions\" \"-fno-rtti\" \"-mthumb\" \"-O0\" \"-UNDEBUG\" \"-fno-limit-debug-info\" \"-IC:/OpenCV-android-sdk/sdk/native/jni/include/opencv\" \"-IC:/OpenCV-android-sdk/sdk/native/jni/include\" \"-IC:/Users/Hwancheol/AppData/Local/Android/sdk/ndk-bundle/build//../sources/cxx-stl/gnu-libstdc++/4.9/include\" \"-IC:/Users/Hwancheol/AppData/Local/Android/sdk/ndk-bundle/build//../sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi/include\" \"-IC:/Users/Hwancheol/AppData/Local/Android/sdk/ndk-bundle/build//../sources/cxx-stl/gnu-libstdc++/4.9/include/backward\" \"-IC:/Users/Hwancheol/Desktop/Syscall-Application/Syscall/app/src/main/jni\" \"-frtti\" \"-fexceptions\" \"-DANDROID\" \"-fPIC\" \"-DANDROID\" \"-fsigned-char\" \"-D__ANDROID_API__\u003d23\" \"-Wa,--noexecstack\" \"-Wformat\" \"-Werror\u003dformat-security\" \"--sysroot\" \"C:/Users/Hwancheol/AppData/Local/Android/sdk/ndk-bundle/build//../sysroot\" \"-isystem\" \"C:/Users/Hwancheol/AppData/Local/Android/sdk/ndk-bundle/build//../sysroot/usr/include/arm-linux-androideabi\""
+          "src": "/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni/enroll.cpp",
+          "flags": "\"-gcc-toolchain\" \"/Users/youngseok/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64\" \"-fpic\" \"-ffunction-sections\" \"-funwind-tables\" \"-fstack-protector-strong\" \"-Wno-invalid-command-line-argument\" \"-Wno-unused-command-line-argument\" \"-no-canonical-prefixes\" \"-fno-integrated-as\" \"-g\" \"-target\" \"armv5te-none-linux-androideabi23\" \"-march\u003darmv5te\" \"-mtune\u003dxscale\" \"-msoft-float\" \"-fno-exceptions\" \"-fno-rtti\" \"-mthumb\" \"-O0\" \"-UNDEBUG\" \"-fno-limit-debug-info\" \"-I/Users/youngseok/Desktop/Hyundai/OpenCV-android-sdk/sdk/native/jni/include/opencv\" \"-I/Users/youngseok/Desktop/Hyundai/OpenCV-android-sdk/sdk/native/jni/include\" \"-I/Users/youngseok/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include\" \"-I/Users/youngseok/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi/include\" \"-I/Users/youngseok/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward\" \"-I/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni\" \"-frtti\" \"-fexceptions\" \"-DANDROID\" \"-fPIC\" \"-DANDROID\" \"-fsigned-char\" \"-D__ANDROID_API__\u003d23\" \"-Wa,--noexecstack\" \"-Wformat\" \"-Werror\u003dformat-security\" \"--sysroot\" \"/Users/youngseok/Library/Android/sdk/ndk-bundle/sysroot\" \"-isystem\" \"/Users/youngseok/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi\""
         }
       ],
-      "output": "C:\\Users\\Hwancheol\\Desktop\\Syscall-Application\\Syscall\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local\\armeabi\\libnative-lib.so"
+      "output": "/Users/youngseok/Desktop/Hyundai/Syscall/app/build/intermediates/ndkBuild/release/obj/local/armeabi/libnative-lib.so"
     }
   },
   "toolchains": {
     "toolchain-armeabi": {
-      "cppCompilerExecutable": "C:\\Users\\Hwancheol\\AppData\\Local\\Android\\sdk\\ndk-bundle\\build\\..\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+      "cppCompilerExecutable": "/Users/youngseok/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
     }
   },
   "cFileExtensions": [],

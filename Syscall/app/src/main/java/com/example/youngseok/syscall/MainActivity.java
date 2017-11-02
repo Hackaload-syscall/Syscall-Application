@@ -6,6 +6,7 @@ import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -18,11 +19,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    UserDBManager userDBManager = new UserDBManager(this, "User.db", null, 1);
+
     BrandSpinnerAdapter brandSpinnerAdapter;
     ColorSpinnerAdapter colorSpinnerAdapter;
     ClassificationSpinnerAdapter classificationSpinnerAdapter;
-
-    UserDBManager userDBManager = new UserDBManager(this, "User.db", null, 1);
 
     List<Brand> brandList;
     List<Classification> classificationList;
@@ -149,7 +150,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.button_enroll:
-                userDBManager.insert(brand, classification, color, isStartDriver, 0, 0);
+                try {
+                    userDBManager.insert(10, 45.5f);
+                } catch(Exception e) {
+                    Log.d("DB Insert Error", "Already enrolled");
+                }
                 break;
 
             case R.id.button_next:
