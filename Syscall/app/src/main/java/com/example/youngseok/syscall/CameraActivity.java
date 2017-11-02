@@ -52,7 +52,7 @@ public class CameraActivity extends AppCompatActivity
     private float eye_radius = 0;
     /* Android UI */
     public TextView tv_Percent = null;
-
+    public TextView tv_SeeFront = null;
     static {
         System.loadLibrary("opencv_java3");
         System.loadLibrary("native-lib");

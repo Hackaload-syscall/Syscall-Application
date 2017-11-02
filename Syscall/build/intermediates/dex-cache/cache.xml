@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\Hwancheol\Desktop\Syscall-Application\Syscall\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="C:\Users\Hwancheol\Desktop\Syscall-Application\Syscall\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_8660bb16d40584b3e5bd428433d7ba6326c3f7f8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Hwancheol\Desktop\Syscall-Application\Syscall\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="4fceac91efdf602527a427e69cec9dafb3a195b8">
+        <dex dex="C:\Users\Hwancheol\Desktop\Syscall-Application\Syscall\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_8bb7a5f3b57f19db7cc89ce1f44d58a1b6a4a202\classes.dex" />
+    </item>
+
+</items>
