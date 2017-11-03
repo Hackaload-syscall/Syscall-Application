@@ -19,6 +19,8 @@ import android.widget.TextView;
 public class RunActivity extends AppCompatActivity {
 
     CalculateVelocity caculateVelocity;
+    DirectionVector directionVector;
+
     LocationManager locationManager;
     SensorManager sensorManager;
 
@@ -28,7 +30,7 @@ public class RunActivity extends AppCompatActivity {
     double accX, accY, accZ;
     double prevLat, prevLon, curLat, curLon;
 
-    TextView textViewLatitude, textViewLongitude, textViewAccel, textViewVelocity;
+    TextView textViewLatitude, textViewLongitude, textViewAccel, textViewVelocity, textViewDirection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class RunActivity extends AppCompatActivity {
         setContentView(R.layout.activity_run);
 
         caculateVelocity = new CalculateVelocity();
+        directionVector = new DirectionVector();
+
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
@@ -48,6 +52,7 @@ public class RunActivity extends AppCompatActivity {
         textViewLongitude = (TextView) findViewById(R.id.textView_longitude);
         textViewAccel = (TextView) findViewById(R.id.textView_accel);
         textViewVelocity = (TextView) findViewById(R.id.textView_velocity);
+        textViewDirection = (TextView) findViewById(R.id.textView_direction);
 
         runThreads();
     }
@@ -154,7 +159,10 @@ public class RunActivity extends AppCompatActivity {
             textViewLongitude.setText(Double.toString(curLon));
 
             if(prevLat != 0 && prevLon != 0) {
+                directionVector.getDirection(prevLat, prevLon, curLat, curLon);
                 textViewVelocity.setText(String.format("%.2f", caculateVelocity.getVelocity(prevLat, prevLon, curLat, curLon)) + "m/s");
+                textViewDirection.setText("(" + String.format("%.2f", directionVector.getDirectionLat())
+                                        + ", " + String.format("%.2f", directionVector.getDirectionLon()) + ")");
             }
 
             prevLat = curLat; prevLon = curLon;
