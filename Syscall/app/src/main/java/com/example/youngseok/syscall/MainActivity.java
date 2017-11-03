@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String androidID, brand, classification, color;
     int isStartDriver = 0;
 
+    TextView textViewIsEnroll;
+
     boolean isEnroll = false;
 
     @Override
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         makeColorList();
 
         TextView textViewAndroidID = (TextView) findViewById(R.id.textView_androidID);
-        TextView textViewIsEnroll = (TextView) findViewById(R.id.textview_isEnroll);
+        textViewIsEnroll = (TextView) findViewById(R.id.textview_isEnroll);
 
         Spinner spinnerBrand = (Spinner) findViewById(R.id.spinner_brand);
         Spinner spinnerClassification = (Spinner) findViewById(R.id.spinner_classification);
@@ -121,6 +123,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        if(CameraActivity.eye_radius != 0) {
+            textViewIsEnroll.setText("등록");
+        }
+    }
+
     public void onClick(View view) {
         Intent intent;
 
@@ -151,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.button_enroll:
                 try {
-                    userDBManager.insert(10, 45.5f);
+                    userDBManager.insert(10, CameraActivity.eye_radius);
                 } catch(Exception e) {
                     Log.d("DB Insert Error", "Already enrolled");
                 }

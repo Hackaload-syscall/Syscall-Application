@@ -18,14 +18,15 @@ import android.widget.TextView;
 
 public class RunActivity extends AppCompatActivity {
 
+    CalculateVelocity caculateVelocity;
     LocationManager locationManager;
     SensorManager sensorManager;
 
     Sensor sensor;
     SensorEventListener sensorEventListener;
 
-    double latitude, longitude;
     double accX, accY, accZ;
+    double prevLat, prevLon, curLat, curLon;
 
     TextView textViewLatitude, textViewLongitude, textViewAccel, textViewVelocity;
 
@@ -34,6 +35,7 @@ public class RunActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
 
+        caculateVelocity = new CalculateVelocity();
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
@@ -70,7 +72,7 @@ public class RunActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
         sensorManager.unregisterListener(sensorEventListener);
     }
@@ -78,8 +80,8 @@ public class RunActivity extends AppCompatActivity {
     private final LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
+            curLat = location.getLatitude();
+            curLon = location.getLongitude();
         }
 
         @Override
@@ -148,8 +150,14 @@ public class RunActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             startLocationService();
 
-            textViewLatitude.setText(Double.toString(latitude));
-            textViewLongitude.setText(Double.toString(longitude));
+            textViewLatitude.setText(Double.toString(curLat));
+            textViewLongitude.setText(Double.toString(curLon));
+
+            if(prevLat != 0 && prevLon != 0) {
+                textViewVelocity.setText(String.format("%.2f", caculateVelocity.getVelocity(prevLat, prevLon, curLat, curLon)) + "m/s");
+            }
+
+            prevLat = curLat; prevLon = curLon;
         }
     };
 
