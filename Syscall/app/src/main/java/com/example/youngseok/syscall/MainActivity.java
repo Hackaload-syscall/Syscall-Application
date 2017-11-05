@@ -163,8 +163,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_enroll:
                 try {
                     userDBManager.insert(10, CameraActivity.eye_radius);
-//                    InsertData task = new InsertData();
-//                    task.execute("http://52.79.165.228/syscall/enrollInfo.php", SplashActivity.serverID ,brand, classification, color, String.valueOf(isStartDriver));
+                    InsertData task = new InsertData();
+                    task.execute("http://52.79.165.228/syscall/enrollInfo.php", SplashActivity.serverID ,brand, classification, color, String.valueOf(isStartDriver));
 
                 } catch(Exception e) {
                     Log.d("DB Insert Error", "Already enrolled");
