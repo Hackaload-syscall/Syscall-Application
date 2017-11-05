@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     List<Classification> classificationList;
     List<Color> colorList;
 
-    String androidID, brand, classification, color;
+    String /*androidID,*/ brand, classification, color;
     int isStartDriver = 0;
 
     TextView textViewIsEnroll;
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getAndroidID();
+        /*getAndroidID();*/
         makeBrandList();
         makeClassificationList();
         makeColorList();
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         CheckBox checkBoxStarter = (CheckBox) findViewById(R.id.checkbox_starter);
 
-        textViewAndroidID.setText(androidID);
+        textViewAndroidID.setText(SplashActivity.serverID);
 
         if(isEnroll) {
             textViewIsEnroll.setText("등록");
@@ -163,8 +163,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_enroll:
                 try {
                     userDBManager.insert(10, CameraActivity.eye_radius);
+//                    InsertData task = new InsertData();
+//                    task.execute("http://52.79.165.228/syscall/enrollInfo.php", SplashActivity.serverID ,brand, classification, color, String.valueOf(isStartDriver));
+
                 } catch(Exception e) {
                     Log.d("DB Insert Error", "Already enrolled");
+                    InsertData task = new InsertData();
+                    task.execute("http://52.79.165.228/syscall/enrollInfo.php", SplashActivity.serverID ,brand, classification, color, String.valueOf(isStartDriver));
                 }
                 break;
 
@@ -178,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /*
     private void getAndroidID() {
         try {
             androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -185,6 +191,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
     }
+    */
 
     private void makeBrandList() {
         brandList = new ArrayList<>();
@@ -236,6 +243,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         colorList.add(new Color("초록", R.drawable.green));
         colorList.add(new Color("노랑", R.drawable.yellow));
         colorList.add(new Color("갈색", R.drawable.brown));
+    }
+
+    class InsertData extends AccessServerDB {
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            super.onPostExecute(result);
+        }
+
+        @Override
+        protected String getPostParameters(String... params) {
+
+            return "ServerID=" + params[1] + "&Brand=" + params[2] + "&Classification=" + params[3] + "&Color=" + params[4] + "&Beginner=" + params[5];
+        }
     }
 
 }

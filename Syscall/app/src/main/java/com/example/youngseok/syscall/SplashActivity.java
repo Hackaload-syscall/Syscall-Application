@@ -5,8 +5,13 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -14,6 +19,9 @@ public class SplashActivity extends AppCompatActivity {
 
     private String androidID = null;
     private int isEnrolled = 1;
+
+    private String myJSON;
+    public static String serverID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +32,10 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         getAndroidID();
+
+        InsertData task = new InsertData();
+        task.execute("http://52.79.165.228/syscall/findID.php",
+                String.valueOf(Long.parseLong(androidID, 16)));
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -56,6 +68,43 @@ public class SplashActivity extends AppCompatActivity {
         try {
             androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    class InsertData extends AccessServerDB {
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            super.onPostExecute(result);
+
+            myJSON = result;
+            getData();
+        }
+
+        @Override
+        protected String getPostParameters(String... params) { return "AndroidID=" + params[1]; }
+    }
+
+    private void getData() {
+
+        try {
+
+            JSONObject jsonObj = new JSONObject(myJSON);
+
+            JSONArray jsonArray = jsonObj.getJSONArray("Result");
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject c = jsonArray.getJSONObject(i);
+
+                isEnrolled = Integer.parseInt(c.getString("Find"));
+                serverID = c.getString("ServerID");
+            }
+
+        } catch(JSONException e) {
+
             e.printStackTrace();
         }
     }

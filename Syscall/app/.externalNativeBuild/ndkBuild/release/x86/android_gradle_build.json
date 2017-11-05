@@ -1,29 +1,29 @@
 {
   "buildFiles": [
-    "/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni/Android.mk",
-    "/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni/Application.mk"
+    "/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/src/main/jni/Android.mk",
+    "/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/src/main/jni/Application.mk"
   ],
   "cleanCommands": [
-    "/Users/youngseok/Library/Android/sdk/ndk-bundle/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni/Application.mk APP_ABI\u003dx86 NDK_ALL_ABIS\u003dx86 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-23 NDK_OUT\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/build/intermediates/ndkBuild/release/lib clean"
+    "/Users/leesangwook/Library/Android/sdk/ndk-bundle/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/src/main/jni/Application.mk APP_ABI\u003dx86 NDK_ALL_ABIS\u003dx86 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-23 NDK_OUT\u003d/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/ndkBuild/release/lib clean"
   ],
   "libraries": {
     "native-lib-release-x86": {
-      "buildCommand": "/Users/youngseok/Library/Android/sdk/ndk-bundle/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni/Application.mk APP_ABI\u003dx86 NDK_ALL_ABIS\u003dx86 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-23 NDK_OUT\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/Users/youngseok/Desktop/Hyundai/Syscall/app/build/intermediates/ndkBuild/release/lib /Users/youngseok/Desktop/Hyundai/Syscall/app/build/intermediates/ndkBuild/release/obj/local/x86/libnative-lib.so",
+      "buildCommand": "/Users/leesangwook/Library/Android/sdk/ndk-bundle/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/src/main/jni/Application.mk APP_ABI\u003dx86 NDK_ALL_ABIS\u003dx86 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-23 NDK_OUT\u003d/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/ndkBuild/release/lib /Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/ndkBuild/release/obj/local/x86/libnative-lib.so",
       "toolchain": "toolchain-x86",
       "abi": "x86",
       "artifactName": "native-lib",
       "files": [
         {
-          "src": "/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni/enroll.cpp",
-          "flags": "\"-gcc-toolchain\" \"/Users/youngseok/Library/Android/sdk/ndk-bundle/toolchains/x86-4.9/prebuilt/darwin-x86_64\" \"-target\" \"i686-none-linux-android\" \"-ffunction-sections\" \"-funwind-tables\" \"-fstack-protector-strong\" \"-fPIC\" \"-Wno-invalid-command-line-argument\" \"-Wno-unused-command-line-argument\" \"-no-canonical-prefixes\" \"-g\" \"-fno-exceptions\" \"-fno-rtti\" \"-O0\" \"-UNDEBUG\" \"-fno-limit-debug-info\" \"-I/Users/youngseok/Desktop/Hyundai/OpenCV-android-sdk/sdk/native/jni/include/opencv\" \"-I/Users/youngseok/Desktop/Hyundai/OpenCV-android-sdk/sdk/native/jni/include\" \"-I/Users/youngseok/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include\" \"-I/Users/youngseok/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/x86/include\" \"-I/Users/youngseok/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward\" \"-I/Users/youngseok/Desktop/Hyundai/Syscall/app/src/main/jni\" \"-frtti\" \"-fexceptions\" \"-DANDROID\" \"-fPIC\" \"-DANDROID\" \"-fsigned-char\" \"-D__ANDROID_API__\u003d23\" \"-Wa,--noexecstack\" \"-Wformat\" \"-Werror\u003dformat-security\" \"-mstackrealign\" \"--sysroot\" \"/Users/youngseok/Library/Android/sdk/ndk-bundle/sysroot\" \"-isystem\" \"/Users/youngseok/Library/Android/sdk/ndk-bundle/sysroot/usr/include/i686-linux-android\""
+          "src": "/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/src/main/jni/enroll.cpp",
+          "flags": "\"-gcc-toolchain\" \"/Users/leesangwook/Library/Android/sdk/ndk-bundle/toolchains/x86-4.9/prebuilt/darwin-x86_64\" \"-target\" \"i686-none-linux-android\" \"-ffunction-sections\" \"-funwind-tables\" \"-fstack-protector-strong\" \"-fPIC\" \"-Wno-invalid-command-line-argument\" \"-Wno-unused-command-line-argument\" \"-no-canonical-prefixes\" \"-g\" \"-fno-exceptions\" \"-fno-rtti\" \"-O0\" \"-UNDEBUG\" \"-fno-limit-debug-info\" \"-I/Users/leesangwook/Documents/OpenCV-android-sdk/sdk/native/jni/include/opencv\" \"-I/Users/leesangwook/Documents/OpenCV-android-sdk/sdk/native/jni/include\" \"-I/Users/leesangwook/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include\" \"-I/Users/leesangwook/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/x86/include\" \"-I/Users/leesangwook/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward\" \"-I/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/src/main/jni\" \"-frtti\" \"-fexceptions\" \"-DANDROID\" \"-fPIC\" \"-DANDROID\" \"-fsigned-char\" \"-D__ANDROID_API__\u003d23\" \"-Wa,--noexecstack\" \"-Wformat\" \"-Werror\u003dformat-security\" \"-mstackrealign\" \"--sysroot\" \"/Users/leesangwook/Library/Android/sdk/ndk-bundle/sysroot\" \"-isystem\" \"/Users/leesangwook/Library/Android/sdk/ndk-bundle/sysroot/usr/include/i686-linux-android\""
         }
       ],
-      "output": "/Users/youngseok/Desktop/Hyundai/Syscall/app/build/intermediates/ndkBuild/release/obj/local/x86/libnative-lib.so"
+      "output": "/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/ndkBuild/release/obj/local/x86/libnative-lib.so"
     }
   },
   "toolchains": {
     "toolchain-x86": {
-      "cppCompilerExecutable": "/Users/youngseok/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+      "cppCompilerExecutable": "/Users/leesangwook/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
     }
   },
   "cFileExtensions": [],
