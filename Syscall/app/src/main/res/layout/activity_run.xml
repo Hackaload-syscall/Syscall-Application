@@ -99,7 +99,7 @@
             android:layout_weight="1"
             android:gravity="center_horizontal|center_vertical"
             android:text="Null"
-            android:textSize="10dp" />
+            android:textSize="18dp" />
 
     </LinearLayout>
 
@@ -182,13 +182,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.65">
+        android:layout_weight="1">
 
         <SurfaceView
             android:id="@+id/surfaceView_runCamera"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2">
+
+        <Button
+            android:id="@+id/button_setting"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="설정 변경"
+            android:textSize="18dp"/>
 
     </LinearLayout>
 

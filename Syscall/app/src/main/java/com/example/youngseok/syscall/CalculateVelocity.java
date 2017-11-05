@@ -9,8 +9,8 @@ public class CalculateVelocity {
         this.curLat = curLat; this.curLon = curLon;
 
 
-        return calcDistance(); // m/s
-//        return ((calcDistance() * 3600) / 1000); // km/h
+//        return calcDistance(); // m/s
+        return ((calcDistance() * 3600) / 1000); // km/h
     }
 
     private double calcDistance() {

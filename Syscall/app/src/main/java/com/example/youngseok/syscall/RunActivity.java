@@ -1,6 +1,7 @@
 package com.example.youngseok.syscall;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -14,21 +15,20 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class RunActivity extends AppCompatActivity {
 
-    CalculateVelocity caculateVelocity;
+    CalculateVelocity calculateVelocity;
     DirectionVector directionVector;
 
     LocationManager locationManager;
-    SensorManager sensorManager;
 
-    Sensor sensor;
-    SensorEventListener sensorEventListener;
-
-    double accX, accY, accZ;
     double prevLat, prevLon, curLat, curLon;
+    double curVelocity;
+    double prevVelocity = -19;
 
     TextView textViewLatitude, textViewLongitude, textViewAccel, textViewVelocity, textViewDirection;
 
@@ -37,16 +37,10 @@ public class RunActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
 
-        caculateVelocity = new CalculateVelocity();
+        calculateVelocity = new CalculateVelocity();
         directionVector = new DirectionVector();
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-
-        sensorEventListener = new AccelometerListener();
-        sensorManager.registerListener(sensorEventListener, sensor, SensorManager.SENSOR_DELAY_UI);
 
         textViewLatitude = (TextView) findViewById(R.id.textView_latitude);
         textViewLongitude = (TextView) findViewById(R.id.textView_longitude);
@@ -54,32 +48,38 @@ public class RunActivity extends AppCompatActivity {
         textViewVelocity = (TextView) findViewById(R.id.textView_velocity);
         textViewDirection = (TextView) findViewById(R.id.textView_direction);
 
+        Button buttonSetting = (Button) findViewById(R.id.button_setting);
+        buttonSetting.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RunActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         runThreads();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        sensorManager.registerListener(sensorEventListener, sensor, SensorManager.SENSOR_DELAY_UI);
 
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        sensorManager.registerListener(sensorEventListener, sensor, SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        sensorManager.unregisterListener(sensorEventListener);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        sensorManager.unregisterListener(sensorEventListener);
     }
 
     private final LocationListener locationListener = new LocationListener() {
@@ -101,37 +101,6 @@ public class RunActivity extends AppCompatActivity {
         public void onProviderDisabled(String s) {
         }
     };
-
-    private class AccelometerListener implements SensorEventListener {
-
-        @Override
-        public void onSensorChanged(SensorEvent event) {
-            if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-                accX = event.values[0];
-                accY = event.values[1];
-                accZ = event.values[2];
-
-                new Thread() {
-                    public void run() {
-                        try {
-                            textViewAccel.setText("X : " + Double.toString(accX) + "\nY : " + Double.toString(accY) + "\nZ : " + Double.toString(accZ));
-                            Thread.sleep(1000);
-                        } catch(Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }.start();
-
-                Log.i("ACCELEROMETER", event.values[0] + " " + event.values[1] + " " + event.values[2]);
-            }
-        }
-
-        @Override
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-        }
-    }
 
     private void startLocationService () {
         long minTime = 1000;
@@ -160,9 +129,18 @@ public class RunActivity extends AppCompatActivity {
 
             if(prevLat != 0 && prevLon != 0) {
                 directionVector.getDirection(prevLat, prevLon, curLat, curLon);
-                textViewVelocity.setText(String.format("%.2f", caculateVelocity.getVelocity(prevLat, prevLon, curLat, curLon)) + "m/s");
-                textViewDirection.setText("(" + String.format("%.2f", directionVector.getDirectionLat())
-                                        + ", " + String.format("%.2f", directionVector.getDirectionLon()) + ")");
+                curVelocity = calculateVelocity.getVelocity(prevLat, prevLon, curLat, curLon);
+
+                Log.d("Velocity", prevVelocity + " " + curVelocity);
+
+                if(curVelocity < prevVelocity + 20) {
+                    textViewVelocity.setText(String.format("%.2f", curVelocity) + "km/h");
+                    textViewAccel.setText(String.format("%.2f", curVelocity - prevVelocity) + "km/h^2");
+                    textViewDirection.setText("(" + String.format("%.2f", directionVector.getDirectionLat() * 100000)
+                            + ", " + String.format("%.2f", directionVector.getDirectionLon() * 100000) + ")");
+
+                    prevVelocity = curVelocity;
+                }
             }
 
             prevLat = curLat; prevLon = curLon;
