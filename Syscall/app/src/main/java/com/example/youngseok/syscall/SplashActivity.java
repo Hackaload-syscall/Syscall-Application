@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
     private final int SPLASH_DISPLAY_LENGTH = 3000;
 
     private String androidID = null;
-    private int isEnrolled = 1;
+    private int isEnrolled = 0; // Default = 0
 
     private String myJSON;
     public static String serverID;
@@ -33,8 +33,9 @@ public class SplashActivity extends AppCompatActivity {
 
         getAndroidID();
 
-        InsertData task = new InsertData();
-        task.execute("http://52.79.165.228/syscall/findID.php",
+        //Get 'serverID' & 'isEnrolled'
+        GetServerID task = new GetServerID();
+        task.execute("http://52.79.165.228/syscall/getServerID.php",
                 String.valueOf(Long.parseLong(androidID, 16)));
 
         new Handler().postDelayed(new Runnable() {
@@ -72,7 +73,8 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    class InsertData extends AccessServerDB {
+    //Connect Server & Get ID
+    class GetServerID extends AccessServerDB {
 
         @Override
         protected void onPostExecute(String result) {
@@ -87,19 +89,19 @@ public class SplashActivity extends AppCompatActivity {
         protected String getPostParameters(String... params) { return "AndroidID=" + params[1]; }
     }
 
+    //JSONData to 'isEnrolled' & 'serverID'
     private void getData() {
 
         try {
 
             JSONObject jsonObj = new JSONObject(myJSON);
-
             JSONArray jsonArray = jsonObj.getJSONArray("Result");
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject c = jsonArray.getJSONObject(i);
 
-                isEnrolled = Integer.parseInt(c.getString("Find"));
+                isEnrolled = Integer.parseInt(c.getString("IsEnrolled"));
                 serverID = c.getString("ServerID");
             }
 

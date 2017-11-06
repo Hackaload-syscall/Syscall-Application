@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        userDBManager.delete();/* */
+
         /*getAndroidID();*/
         makeBrandList();
         makeClassificationList();
@@ -163,14 +165,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_enroll:
                 try {
                     userDBManager.insert(10, CameraActivity.eye_radius);
-                    InsertData task = new InsertData();
-                    task.execute("http://52.79.165.228/syscall/enrollInfo.php", SplashActivity.serverID ,brand, classification, color, String.valueOf(isStartDriver));
-
                 } catch(Exception e) {
                     Log.d("DB Insert Error", "Already enrolled");
-                    InsertData task = new InsertData();
-                    task.execute("http://52.79.165.228/syscall/enrollInfo.php", SplashActivity.serverID ,brand, classification, color, String.valueOf(isStartDriver));
                 }
+
+                //Set Information
+                SetInformation task = new SetInformation();
+                task.execute("http://52.79.165.228/syscall/setInformation.php",
+                        SplashActivity.serverID ,brand, classification, color, String.valueOf(isStartDriver));
                 break;
 
             case R.id.button_next:
@@ -245,7 +247,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         colorList.add(new Color("갈색", R.drawable.brown));
     }
 
-    class InsertData extends AccessServerDB {
+    //Set Information
+    class SetInformation extends AccessServerDB {
 
         @Override
         protected void onPostExecute(String result) {
@@ -259,5 +262,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return "ServerID=" + params[1] + "&Brand=" + params[2] + "&Classification=" + params[3] + "&Color=" + params[4] + "&Beginner=" + params[5];
         }
     }
-
 }
