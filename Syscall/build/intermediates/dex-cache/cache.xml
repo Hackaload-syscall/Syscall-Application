@@ -3,102 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/openCVLibrary331/build/intermediates/bundles/default/classes.jar"
+        jar="/Users/youngseok/Desktop/Hyundai/Syscall/openCVLibrary331/build/intermediates/bundles/default/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
         sha1="b98aeb58fbc135ff1c9b02384fd13fa84e6bbc93">
-        <dex dex="/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/pre-dexed/debug/classes_28f4c056ccf3b3b547411afddd76a8facadc1c7a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/leesangwook/.android/build-cache/6c8bee806c807ed45b1699e12366833b667e72e0/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
-        <dex dex="/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/pre-dexed/debug/classes_7cf61b02cfd2c289e352df8518f392b2b0d61342.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/leesangwook/.android/build-cache/00814b9d40684c50f3957c9aac40b3feb4294b81/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="2e92aa0163544a804a0b34f169ca61801770839a">
-        <dex dex="/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/pre-dexed/debug/classes_97747350d1c96f682ab21f9dcf64ac13f8a40401.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/leesangwook/.android/build-cache/30a00ef833c0ecadd554713411dbe76697f6f271/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
-        <dex dex="/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/pre-dexed/debug/classes_3fda59916f261aae4efaa166839e8b28774e8fa5.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/leesangwook/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/26.0.0-alpha1/support-annotations-26.0.0-alpha1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="023ee503b631f69511e335a061ea008f8da60f40">
-        <dex dex="/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/pre-dexed/debug/support-annotations-26.0.0-alpha1_f28896d3849a38dad51fd0581629088d7ad81f8b.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/leesangwook/.android/build-cache/7e5dea13776168a9066ca3a2a5110ac72ba9ea12/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
-        <dex dex="/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/pre-dexed/debug/classes_8317e7047fe586b4c99451321c24586d992d7eb5.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/leesangwook/.android/build-cache/7cf7908572f6a38676cb29b60dcbd55a49b1787f/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="47471eb19df288158b00b8d9cfa41bce7373f5cc">
-        <dex dex="/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/pre-dexed/debug/classes_5e1e0ff25818b2f4ce17253c65b18d4e026fc153.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/leesangwook/.android/build-cache/02f6ec43cfe94712aec6962959e4614d74aa6cd4/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/pre-dexed/debug/classes_8f6a4e55d41f9b55c75f47facb35214172f4b329.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/leesangwook/.android/build-cache/d1d88479bba43188e49cdf2188bd5aa4106d4d3c/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="952944218ecedea1554a513dec0c14d570642843">
-        <dex dex="/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/pre-dexed/debug/classes_c378d6cfe165a3649f56e46074d75de252902a3a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/leesangwook/.android/build-cache/e2563df62685eb6f61e38f328b136104d32ba71a/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="88246166d5afb106f532f6e6deae683c66b42c89">
-        <dex dex="/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/pre-dexed/debug/classes_e321877099a5eacb89ab130fbf4bf287fa252ca6.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/leesangwook/.android/build-cache/7aaac4b56fff6d1133c289a7af137be0b8feda3a/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="9935891f23923f39d002087085d9696568a9f657">
-        <dex dex="/Users/leesangwook/Desktop/git/Syscall-Application/Syscall/app/build/intermediates/pre-dexed/debug/classes_3adcd15b741d06bbca9da68f849e931e0e95eab6.jar" />
+        <dex dex="/Users/youngseok/Desktop/Hyundai/Syscall/app/build/intermediates/pre-dexed/debug/classes_1fa21ba1ae31c09e33282d1146ff781d88ae8234.jar" />
     </item>
 
 </items>

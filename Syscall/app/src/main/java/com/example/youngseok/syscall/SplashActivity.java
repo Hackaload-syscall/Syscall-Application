@@ -36,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
         //Get 'serverID' & 'isEnrolled'
         GetServerID task = new GetServerID();
         task.execute("http://52.79.165.228/syscall/getServerID.php",
-                String.valueOf(Long.parseLong(androidID, 16)));
+                String.valueOf(Long.parseLong(androidID.substring(2), 16)));
 
         new Handler().postDelayed(new Runnable() {
             @Override

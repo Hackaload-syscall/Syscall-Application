@@ -198,53 +198,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void makeBrandList() {
         brandList = new ArrayList<>();
 
-        brandList.add(new Brand("Hyundai", R.drawable.hyundai_logo));
-        brandList.add(new Brand("KIA", R.drawable.kia_logo));
-        brandList.add(new Brand("Ssang Yong", R.drawable.ssangyong_logo));
-        brandList.add(new Brand("Renault", R.drawable.renault_logo));
-        brandList.add(new Brand("Chevrolet", R.drawable.chevrolet_logo));
-        brandList.add(new Brand("Honda", R.drawable.honda_logo));
-        brandList.add(new Brand("Toyota", R.drawable.toyota_logo));
-        brandList.add(new Brand("Lexus", R.drawable.lexus_logo));
-        brandList.add(new Brand("Nissan", R.drawable.nissan_logo));
-        brandList.add(new Brand("Infinity", R.drawable.infinity_logo));
-        brandList.add(new Brand("BMW", R.drawable.bmw_logo));
-        brandList.add(new Brand("Audi", R.drawable.audi_logo));
-        brandList.add(new Brand("Benz", R.drawable.benz_logo));
-        brandList.add(new Brand("Porsche", R.drawable.porsche_logo));
-        brandList.add(new Brand("Jaguar", R.drawable.jaguar_logo));
-        brandList.add(new Brand("Ford", R.drawable.ford_logo));
-        brandList.add(new Brand("Peugeot", R.drawable.peugeot_logo));
-        brandList.add(new Brand("Cadillac", R.drawable.cadillac_logo));
-        brandList.add(new Brand("Volkswagen", R.drawable.volkswagen_logo));
-        brandList.add(new Brand("Tesla", R.drawable.tesla_logo));
+        brandList.add(new Brand("Hyundai", R.drawable.hyundai_logo, 0));
+        brandList.add(new Brand("KIA", R.drawable.kia_logo, 1));
+        brandList.add(new Brand("Ssang Yong", R.drawable.ssangyong_logo, 2));
+        brandList.add(new Brand("Renault", R.drawable.renault_logo, 3));
+        brandList.add(new Brand("Chevrolet", R.drawable.chevrolet_logo, 4));
+        brandList.add(new Brand("Honda", R.drawable.honda_logo, 5));
+        brandList.add(new Brand("Toyota", R.drawable.toyota_logo, 6));
+        brandList.add(new Brand("Lexus", R.drawable.lexus_logo, 7));
+        brandList.add(new Brand("Nissan", R.drawable.nissan_logo, 8));
+        brandList.add(new Brand("Infinity", R.drawable.infinity_logo, 9));
+        brandList.add(new Brand("BMW", R.drawable.bmw_logo, 10));
+        brandList.add(new Brand("Audi", R.drawable.audi_logo, 11));
+        brandList.add(new Brand("Benz", R.drawable.benz_logo, 12));
+        brandList.add(new Brand("Porsche", R.drawable.porsche_logo, 13));
+        brandList.add(new Brand("Jaguar", R.drawable.jaguar_logo, 14));
+        brandList.add(new Brand("Ford", R.drawable.ford_logo, 15));
+        brandList.add(new Brand("Peugeot", R.drawable.peugeot_logo, 16));
+        brandList.add(new Brand("Cadillac", R.drawable.cadillac_logo, 17));
+        brandList.add(new Brand("Volkswagen", R.drawable.volkswagen_logo, 18));
+        brandList.add(new Brand("Tesla", R.drawable.tesla_logo, 19));
     }
 
     private void makeClassificationList() {
         classificationList = new ArrayList<>();
 
-        classificationList.add(new Classification("경형"));
-        classificationList.add(new Classification("소형"));
-        classificationList.add(new Classification("중형"));
-        classificationList.add(new Classification("대형"));
-        classificationList.add(new Classification("트럭"));
-        classificationList.add(new Classification("버스"));
+        classificationList.add(new Classification("경형", 0));
+        classificationList.add(new Classification("소형", 1));
+        classificationList.add(new Classification("중형", 2));
+        classificationList.add(new Classification("대형", 3));
+        classificationList.add(new Classification("트럭", 4));
+        classificationList.add(new Classification("버스", 5));
     }
 
     private void makeColorList() {
         colorList = new ArrayList<>();
 
-        colorList.add(new Color("검정", R.drawable.black));
-        colorList.add(new Color("흰색", R.drawable.white));
-        colorList.add(new Color("회색", R.drawable.gray));
-        colorList.add(new Color("빨강", R.drawable.red));
-        colorList.add(new Color("주황", R.drawable.orange));
-        colorList.add(new Color("파랑", R.drawable.blue));
-        colorList.add(new Color("보라", R.drawable.violet));
-        colorList.add(new Color("분홍", R.drawable.pink));
-        colorList.add(new Color("초록", R.drawable.green));
-        colorList.add(new Color("노랑", R.drawable.yellow));
-        colorList.add(new Color("갈색", R.drawable.brown));
+        colorList.add(new Color("검정", R.drawable.black, 0));
+        colorList.add(new Color("흰색", R.drawable.white, 1));
+        colorList.add(new Color("회색", R.drawable.gray, 2));
+        colorList.add(new Color("빨강", R.drawable.red, 3));
+        colorList.add(new Color("주황", R.drawable.orange, 4));
+        colorList.add(new Color("파랑", R.drawable.blue, 5));
+        colorList.add(new Color("보라", R.drawable.violet, 6));
+        colorList.add(new Color("분홍", R.drawable.pink, 7));
+        colorList.add(new Color("초록", R.drawable.green, 8));
+        colorList.add(new Color("노랑", R.drawable.yellow, 9));
+        colorList.add(new Color("갈색", R.drawable.brown, 10));
     }
 
     //Set Information
