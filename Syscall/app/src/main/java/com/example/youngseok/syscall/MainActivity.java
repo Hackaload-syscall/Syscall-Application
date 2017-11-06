@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     String /*androidID,*/ brand, classification, color;
     int isStartDriver = 0;
+    int wearGlasses = 0;
 
     TextView textViewIsEnroll;
 
@@ -41,7 +42,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userDBManager.delete();/* */
+//        userDBManager.delete();/* */
+//        userDBManager.dropTable();
 
         /*getAndroidID();*/
         makeBrandList();
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button buttonNext = (Button) findViewById(R.id.button_next);
 
         CheckBox checkBoxStarter = (CheckBox) findViewById(R.id.checkbox_starter);
+        CheckBox checkBoxGlasses = (CheckBox) findViewById(R.id.checkbox_glasses);
 
         textViewAndroidID.setText(SplashActivity.serverID);
 
@@ -123,6 +126,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+
+        checkBoxGlasses.setOnClickListener(new CheckBox.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(((CheckBox)v).isChecked()) {
+                    wearGlasses = 1;
+                } else {
+                    wearGlasses = 0;
+                }
+            }
+        });
     }
 
     @Override
@@ -164,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.button_enroll:
                 try {
-                    userDBManager.insert(10, CameraActivity.eye_radius);
+                    userDBManager.insert(Integer.valueOf(SplashActivity.serverID), wearGlasses, CameraActivity.eye_radius);
                 } catch(Exception e) {
                     Log.d("DB Insert Error", "Already enrolled");
                 }

@@ -13,7 +13,7 @@ public class UserDBManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE USER (serverID INTEGER PRIMARY KEY, eyeSize REAL);");
+        db.execSQL("CREATE TABLE USER (serverID INTEGER PRIMARY KEY, wearGlasses INTEGER, eyeSize REAL);");
     }
 
     @Override
@@ -21,17 +21,23 @@ public class UserDBManager extends SQLiteOpenHelper {
 
     }
 
-    public void insert(int serverID, float eyeSize) {
+    public void insert(int serverID, int wearGlasses, float eyeSize) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO USER VALUES ( " + serverID + ", " + eyeSize + ");");
+        db.execSQL("INSERT INTO USER VALUES ( " + serverID + ", " + wearGlasses + ", " + eyeSize + ");");
 
-        Log.d("DB Insert", "<serverID : " + serverID + "> <eyeSize : " + eyeSize + ">");
+        Log.d("DB Insert", "(serverID : " + serverID + ") (wearGlasses : " + wearGlasses + ") (eyeSize : " + eyeSize + ")");
         db.close();
     }
 
     public void delete() {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM USER");
+        db.close();
+    }
+
+    public void dropTable() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DROP TABLE USER");
         db.close();
     }
 }

@@ -41,26 +41,52 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="246" column="58" selection-start-line="246" selection-start-column="58" selection-end-line="246" selection-end-column="58" />
+            <state relative-caret-position="154">
+              <caret line="180" column="26" selection-start-line="180" selection-start-column="24" selection-end-line="180" selection-end-column="26" />
               <folding>
-                <element signature="class#3460:3825" expanded="false" />
-                <element signature="class#3880:4227" expanded="false" />
-                <element signature="method#onRestart#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#3607:3972" expanded="false" />
+                <element signature="class#4027:4374" expanded="false" />
+                <element signature="e#4421#4710#0" expanded="true" />
+                <element signature="e#4709#4710#0" expanded="true" />
+                <element signature="e#4757#5042#0" expanded="true" />
+                <element signature="e#5041#5042#0" expanded="true" />
                 <element signature="class#SetInformation#0;class#MainActivity#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RunActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserDBManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/UserDBManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+          <provider selected="true" editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="236">
+              <caret line="208" column="39" selection-start-line="208" selection-start-column="39" selection-end-line="208" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RunActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/RunActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="45" column="2" selection-start-line="45" selection-start-column="2" selection-end-line="45" selection-end-column="2" />
+            <state relative-caret-position="-90">
+              <caret line="138" column="48" selection-start-line="138" selection-start-column="48" selection-end-line="138" selection-end-column="48" />
               <folding>
                 <element signature="e#1907#2172#0" expanded="true" />
                 <element signature="e#2171#2172#0" expanded="true" />
@@ -68,16 +94,6 @@
                 <element signature="e#5639#5640#0" expanded="true" />
                 <element signature="class#UpdateLocationInformation#0;class#RunActivity#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Android.mk" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/jni/Android.mk">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="22" selection-start-line="0" selection-start-column="22" selection-end-line="16" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -2840,7 +2856,6 @@
         <option value="$PROJECT_DIR$/app/src/main/jni/com_example_youngseok_syscall_CameraActivity.h" />
         <option value="$PROJECT_DIR$/app/src/main/jni/enroll.cpp" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_camera.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/UserDBManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/CaculateVelocity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/DirectionVector.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/DirectionVector.java" />
@@ -2848,14 +2863,15 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/CalculateVelocity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/CameraActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/AccessServerDB.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/RunActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/jni/Android.mk" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/SplashActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/Color.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/Brand.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/Classification.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/UserDBManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
       </list>
     </option>
   </component>
@@ -3442,6 +3458,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32754344" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32966322" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914925" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32909605" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -3461,7 +3478,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32966322" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -3825,25 +3841,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/UserDBManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/ClassificationSpinnerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -3857,7 +3854,7 @@
         <state relative-caret-position="1035">
           <caret line="77" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="93" selection-end-column="1" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3867,32 +3864,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="22" selection-start-line="0" selection-start-column="22" selection-end-line="16" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/RunActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="45" column="2" selection-start-line="45" selection-start-column="2" selection-end-line="45" selection-end-column="2" />
-          <folding>
-            <element signature="e#1907#2172#0" expanded="true" />
-            <element signature="e#2171#2172#0" expanded="true" />
-            <element signature="e#4078#5640#0" expanded="true" />
-            <element signature="e#5639#5640#0" expanded="true" />
-            <element signature="class#UpdateLocationInformation#0;class#RunActivity#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/SplashActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-65">
-          <caret line="38" column="67" selection-start-line="38" selection-start-column="67" selection-end-line="38" selection-end-column="67" />
-          <folding>
-            <element signature="class#GetServerID#0;class#SplashActivity#0" expanded="false" />
-            <element signature="method#onPostExecute#0;class#GetServerID#0;class#SplashActivity#0" expanded="false" />
-            <element signature="method#getData#0;class#SplashActivity#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3920,15 +3891,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="208" column="39" selection-start-line="208" selection-start-column="39" selection-end-line="208" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/UserDBManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="246" column="58" selection-start-line="246" selection-start-column="58" selection-end-line="246" selection-end-column="58" />
+        <state relative-caret-position="154">
+          <caret line="180" column="26" selection-start-line="180" selection-start-column="24" selection-end-line="180" selection-end-column="26" />
           <folding>
-            <element signature="class#3460:3825" expanded="false" />
-            <element signature="class#3880:4227" expanded="false" />
-            <element signature="method#onRestart#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#3607:3972" expanded="false" />
+            <element signature="class#4027:4374" expanded="false" />
+            <element signature="e#4421#4710#0" expanded="true" />
+            <element signature="e#4709#4710#0" expanded="true" />
+            <element signature="e#4757#5042#0" expanded="true" />
+            <element signature="e#5041#5042#0" expanded="true" />
             <element signature="class#SetInformation#0;class#MainActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/SplashActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-65">
+          <caret line="38" column="67" selection-start-line="38" selection-start-column="67" selection-end-line="38" selection-end-column="67" />
+          <folding>
+            <element signature="class#GetServerID#0;class#SplashActivity#0" expanded="false" />
+            <element signature="method#onPostExecute#0;class#GetServerID#0;class#SplashActivity#0" expanded="false" />
+            <element signature="method#getData#0;class#SplashActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/RunActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-90">
+          <caret line="138" column="48" selection-start-line="138" selection-start-column="48" selection-end-line="138" selection-end-column="48" />
+          <folding>
+            <element signature="e#1907#2172#0" expanded="true" />
+            <element signature="e#2171#2172#0" expanded="true" />
+            <element signature="e#4078#5640#0" expanded="true" />
+            <element signature="e#5639#5640#0" expanded="true" />
+            <element signature="class#UpdateLocationInformation#0;class#RunActivity#0" expanded="false" />
           </folding>
         </state>
       </provider>
