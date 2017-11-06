@@ -27,14 +27,11 @@ public class BrandSpinnerAdapter extends BaseAdapter {
     }
 
     @Override
-    public String getItem(int i) {
-
-        return brandList.get(i).getName();
-    }
+    public String getItem(int i) { return brandList.get(i).getName(); }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return brandList.get(i).getId();
     }
 
     @Override
