@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Set Information
                 SetInformation task = new SetInformation();
                 task.execute("http://52.79.165.228/syscall/setInformation.php",
-                        SplashActivity.serverID ,brand, classification, color, String.valueOf(isStartDriver));
+                        SplashActivity.serverID, brand, classification, color, String.valueOf(isStartDriver));
                 break;
 
             case R.id.button_next:

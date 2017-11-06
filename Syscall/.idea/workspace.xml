@@ -41,14 +41,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1365">
-              <caret line="106" column="11" selection-start-line="106" selection-start-column="11" selection-end-line="106" selection-end-column="11" />
+            <state relative-caret-position="2445">
+              <caret line="188" column="95" selection-start-line="188" selection-start-column="95" selection-end-line="188" selection-end-column="95" />
               <folding>
                 <element signature="class#SetInformation#0;class#MainActivity#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RunActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/RunActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="504">
+              <caret line="149" column="85" selection-start-line="149" selection-start-column="85" selection-end-line="149" selection-end-column="85" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -2789,12 +2799,12 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/Classification.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/UserDBManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/RunActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/jni/Android.mk" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/ClassificationSpinnerAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/ColorSpinnerAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/BrandSpinnerAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/RunActivity.java" />
       </list>
     </option>
   </component>
@@ -3786,16 +3796,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/RunActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="138" column="48" selection-start-line="138" selection-start-column="48" selection-end-line="138" selection-end-column="48" />
-          <folding>
-            <element signature="class#UpdateLocationInformation#0;class#RunActivity#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/jni/Android.mk">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -3857,11 +3857,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1365">
-          <caret line="106" column="11" selection-start-line="106" selection-start-column="11" selection-end-line="106" selection-end-column="11" />
+        <state relative-caret-position="2445">
+          <caret line="188" column="95" selection-start-line="188" selection-start-column="95" selection-end-line="188" selection-end-column="95" />
           <folding>
             <element signature="class#SetInformation#0;class#MainActivity#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/youngseok/syscall/RunActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="149" column="85" selection-start-line="149" selection-start-column="85" selection-end-line="149" selection-end-column="85" />
+          <folding />
         </state>
       </provider>
     </entry>
