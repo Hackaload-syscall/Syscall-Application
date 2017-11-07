@@ -1,1 +1,2 @@
-Android.mk
+**/Android.mk
+**/.idea/workspace.xml
