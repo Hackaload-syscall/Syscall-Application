@@ -27,14 +27,11 @@ public class ColorSpinnerAdapter extends BaseAdapter {
     }
 
     @Override
-    public String getItem(int i) {
-
-        return colorList.get(i).getName();
-    }
+    public String getItem(int i) { return colorList.get(i).getName(); }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return colorList.get(i).getId();
     }
 
     @Override

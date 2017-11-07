@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         spinnerBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                brand = brandSpinnerAdapter.getItem(position).toString();
+                brand = String.valueOf((int) brandSpinnerAdapter.getItemId(position));
             }
 
             @Override
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         spinnerClassification.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                classification = classificationSpinnerAdapter.getItem(position).toString();
+                classification = String.valueOf((int) classificationSpinnerAdapter.getItemId(position));
             }
 
             @Override
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         spinnerColor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                color = colorSpinnerAdapter.getItem(position).toString();
+                color = String.valueOf((int) colorSpinnerAdapter.getItemId(position));
             }
 
             @Override
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Set Information
                 SetInformation task = new SetInformation();
                 task.execute("http://52.79.165.228/syscall/setInformation.php",
-                        SplashActivity.serverID ,brand, classification, color, String.valueOf(isStartDriver));
+                        SplashActivity.serverID, brand, classification, color, String.valueOf(isStartDriver));
                 break;
 
             case R.id.button_next:

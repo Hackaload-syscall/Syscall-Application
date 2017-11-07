@@ -133,17 +133,21 @@ public class RunActivity extends AppCompatActivity {
 
                 Log.d("Velocity", prevVelocity + " " + curVelocity);
 
-                //Update Latitude & Longitude & Acceleration
-                UpdateLocationInformation task = new UpdateLocationInformation();
-                task.execute("http://52.79.165.228/syscall/updateLocationInformation.php",
-                        SplashActivity.serverID,
-                        Double.toString(curLat), Double.toString(curLon), Double.toString(curVelocity - prevVelocity));
-
                 if(curVelocity < prevVelocity + 20) {
                     textViewVelocity.setText(String.format("%.2f", curVelocity) + "km/h");
                     textViewAccel.setText(String.format("%.2f", curVelocity - prevVelocity) + "km/h^2");
                     textViewDirection.setText("(" + String.format("%.2f", directionVector.getDirectionLat() * 100000)
                             + ", " + String.format("%.2f", directionVector.getDirectionLon() * 100000) + ")");
+
+                    //Update Latitude & Longitude & Acceleration
+                    UpdateLocationInformation task = new UpdateLocationInformation();
+                    task.execute("http://52.79.165.228/syscall/updateLocationInformation.php",
+                            SplashActivity.serverID,
+                            Double.toString(curLat),
+                            Double.toString(curLon),
+                            Double.toString(curVelocity - prevVelocity),
+                            String.valueOf(directionVector.getDirectionLat() * 100000),
+                            String.valueOf(directionVector.getDirectionLon() * 100000));
 
                     prevVelocity = curVelocity;
                 }
@@ -182,7 +186,7 @@ public class RunActivity extends AppCompatActivity {
         @Override
         protected String getPostParameters(String... params) {
 
-            return "ServerID=" + params[1] + "&Latitude=" + params[2] + "&Longitude=" + params[3] + "&Acceleration=" + params[4];
+            return "ServerID=" + params[1] + "&Latitude=" + params[2] + "&Longitude=" + params[3] + "&Acceleration=" + params[4] + "&Direction_X=" + params[5] + "&Direction_Y=" + params[6];
         }
     }
 }
