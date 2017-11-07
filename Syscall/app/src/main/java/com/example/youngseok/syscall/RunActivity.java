@@ -19,6 +19,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class RunActivity extends AppCompatActivity {
 
     CalculateVelocity calculateVelocity;
@@ -26,9 +28,13 @@ public class RunActivity extends AppCompatActivity {
 
     LocationManager locationManager;
 
+    List<OtherCar> otherCarsList;
+
     double prevLat, prevLon, curLat, curLon;
     double curVelocity;
     double prevVelocity = -19;
+
+    private boolean flag = true;
 
     TextView textViewLatitude, textViewLongitude, textViewAccel, textViewVelocity, textViewDirection;
 
@@ -75,11 +81,31 @@ public class RunActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
+        flag = false;
+
+        UpdateLocationInformation task = new UpdateLocationInformation();
+        task.execute("http://52.79.165.228/syscall/updateLocationInformation.php",
+                SplashActivity.serverID,
+                Double.toString(0),
+                Double.toString(0),
+                Double.toString(0),
+                String.valueOf(0),
+                String.valueOf(0));
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        flag = false;
+
+        UpdateLocationInformation task = new UpdateLocationInformation();
+        task.execute("http://52.79.165.228/syscall/updateLocationInformation.php",
+                SplashActivity.serverID,
+                Double.toString(0),
+                Double.toString(0),
+                Double.toString(0),
+                String.valueOf(0),
+                String.valueOf(0));
     }
 
     private final LocationListener locationListener = new LocationListener() {
@@ -161,7 +187,7 @@ public class RunActivity extends AppCompatActivity {
         @Override
         public void run() {
 
-            while(true) {
+            while(flag) {
                 Message msg = Message.obtain();
                 mainHandler.sendMessage(msg);
 

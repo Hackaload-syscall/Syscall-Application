@@ -199,16 +199,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    /*
-    private void getAndroidID() {
-        try {
-            androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-    */
-
     private void makeBrandList() {
         brandList = new ArrayList<>();
 
