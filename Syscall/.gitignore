@@ -1,2 +1,4 @@
-Android.mk
-.idea/workspace.xml
+*.mk
+.idea/
+.gradle/
+build/
