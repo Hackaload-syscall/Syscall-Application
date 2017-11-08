@@ -3,14 +3,11 @@ package com.example.youngseok.syscall;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Message;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +22,12 @@ import org.json.JSONObject;
 import java.util.LinkedList;
 import java.util.List;
 
-public class RunActivity extends AppCompatActivity {
+public class RunActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
+
+    String []brandArr = { "현대", "기아", "쌍용", "르노", "쉐보레", "혼다", "도요타", "렉서스", "닛싼", "인피니티",
+                          "비엠떠블유", "아우디", "벤츠", "포르쉐", "재규어", "포드", "푸조", "캐딜락", "폭스바겐", "테슬라" };
+    String []classificationArr = { "경형", "소형", "중형", "대형", "트럭", "버스" };
+    String []colorArr = { "검정", "흰색", "회색", "빨강", "주황", "파랑", "보라", "분홍", "초록", "노랑", "갈색" };
 
     CalculateVelocity calculateVelocity;
     DirectionVector directionVector;
@@ -36,18 +38,29 @@ public class RunActivity extends AppCompatActivity {
 
     String myJSON;
 
-    double prevLat, prevLon, curLat, curLon;
+    double prevLat, prevLon, curLat, curLon, dirLat, dirLon;
     double curVelocity;
     double prevVelocity = -19;
 
     private boolean flag = true;
 
+    private TextToSpeech myTTS;
+    private Angle angle;
+
     TextView textViewLatitude, textViewLongitude, textViewAccel, textViewVelocity, textViewDirection;
+
+    public void onInit(int status) {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
+
+        flag = true;
+
+        myTTS = new TextToSpeech(this, this);
 
         calculateVelocity = new CalculateVelocity();
         directionVector = new DirectionVector();
@@ -76,7 +89,13 @@ public class RunActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        flag = true;
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        flag = true;
     }
 
     @Override
@@ -103,6 +122,7 @@ public class RunActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         flag = false;
+        myTTS.shutdown();
 
         UpdateLocationInformation task = new UpdateLocationInformation();
         task.execute("http://52.79.165.228/syscall/updateLocationInformation.php",
@@ -166,10 +186,12 @@ public class RunActivity extends AppCompatActivity {
                 Log.d("Velocity", prevVelocity + " " + curVelocity);
 
                 if(curVelocity < prevVelocity + 20) {
+                    dirLat = directionVector.getDirectionLat() * 100000;
+                    dirLon = directionVector.getDirectionLon() * 100000;
+
                     textViewVelocity.setText(String.format("%.2f", curVelocity) + "km/h");
                     textViewAccel.setText(String.format("%.2f", curVelocity - prevVelocity) + "km/h^2");
-                    textViewDirection.setText("(" + String.format("%.2f", directionVector.getDirectionLat() * 100000)
-                            + ", " + String.format("%.2f", directionVector.getDirectionLon() * 100000) + ")");
+                    textViewDirection.setText("(" + String.format("%.2f", dirLat) + ", " + String.format("%.2f", dirLon) + ")");
 
                     //Update Latitude & Longitude & Acceleration
                     UpdateLocationInformation task = new UpdateLocationInformation();
@@ -268,8 +290,21 @@ public class RunActivity extends AppCompatActivity {
             }
 
             for (OtherCar oc : otherCarsList) {
-                
-                Log.e("checkOtherCarList", String.valueOf(oc.getBrand()));
+                String ocBrand = brandArr[oc.getBrand()];
+                String ocClassification = classificationArr[oc.getClassification()];
+                String ocColor = colorArr[oc.getColor()];
+                String ocBeginner = (oc.getBeginner() == 0 ? "" : "초보운전");
+                String ocDrowsy = (oc.getDrowsy() == 0 ? "" : "졸음운전");
+
+                MyCar myCar = new MyCar(curLat, curLon, dirLat, dirLon);
+                OtherCar otherCar = new OtherCar(oc.getBrand(), oc.getClassification(), oc.getColor(), oc.getLatitude(), oc.getLongitude(),
+                                                oc.getVectorLat(), oc.getVectorLon(), oc.getBeginner(), oc.getDrowsy());
+
+                Angle angle = new Angle(myCar, otherCar);
+
+                Log.e("Other Car Info", ocBrand + " " + ocClassification + " " + ocColor + " " + ocBeginner + " " + ocDrowsy + " " + angle.getAngleWithOtherCar());
+                myTTS.speak(ocBrand + ocClassification + ocColor + ocBeginner + ocDrowsy + angle.getAngleWithOtherCar(), TextToSpeech.QUEUE_ADD, null);
+
             }
 
         } catch(Exception e) {

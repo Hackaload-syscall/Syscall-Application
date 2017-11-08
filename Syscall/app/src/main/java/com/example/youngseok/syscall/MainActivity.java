@@ -2,7 +2,6 @@ package com.example.youngseok.syscall;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+
 
     UserDBManager userDBManager = new UserDBManager(this, "User.db", null, 1);
 
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button buttonHelp = (Button) findViewById(R.id.button_help);
         Button buttonCamera = (Button) findViewById(R.id.button_camera);
-        Button buttonEnroll = (Button) findViewById(R.id.button_enroll);
+//        Button buttonEnroll = (Button) findViewById(R.id.button_enroll);
         Button buttonNext = (Button) findViewById(R.id.button_next);
 
         CheckBox checkBoxStarter = (CheckBox) findViewById(R.id.checkbox_starter);
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         buttonHelp.setOnClickListener(this);
         buttonCamera.setOnClickListener(this);
-        buttonEnroll.setOnClickListener(this);
+//        buttonEnroll.setOnClickListener(this);
         buttonNext.setOnClickListener(this);
 
         spinnerBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -173,20 +174,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
 
-            case R.id.button_enroll:
+//            case R.id.button_enroll:
+//                try {
+//                    userDBManager.insert(Integer.valueOf(SplashActivity.serverID), wearGlasses, CameraActivity.eye_radius);
+//                } catch(Exception e) {
+//                    Log.d("DB Insert Error", "Already enrolled");
+//                }
+
+                //Set Information
+//                SetInformation task = new SetInformation();
+//                task.execute("http://52.79.165.228/syscall/setInformation.php",
+//                        SplashActivity.serverID, brand, classification, color, String.valueOf(isStartDriver));
+//                break;
+
+            case R.id.button_next:
+                userDBManager.delete();
+
                 try {
                     userDBManager.insert(Integer.valueOf(SplashActivity.serverID), wearGlasses, CameraActivity.eye_radius);
                 } catch(Exception e) {
                     Log.d("DB Insert Error", "Already enrolled");
                 }
 
-                //Set Information
                 SetInformation task = new SetInformation();
                 task.execute("http://52.79.165.228/syscall/setInformation.php",
                         SplashActivity.serverID, brand, classification, color, String.valueOf(isStartDriver));
-                break;
 
-            case R.id.button_next:
                 intent = new Intent(getApplicationContext(), RunActivity.class);
                 startActivity(intent);
                 break;

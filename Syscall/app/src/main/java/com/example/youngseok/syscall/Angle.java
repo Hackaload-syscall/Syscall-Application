@@ -1,5 +1,7 @@
 package com.example.youngseok.syscall;
 
+import android.util.Log;
+
 public class Angle {
     private MyCar myCar;
     private OtherCar otherCar;
@@ -10,10 +12,15 @@ public class Angle {
     }
 
     private double calcAngle() {
+//        double dirLat = 1.0;
+//        double dirLon = Math.sqrt(3);
+
         double dirLat = myCar.getDirLat(); double dirLon = myCar.getDirLon();
         double otherLat = otherCar.getLatitude(); double otherLon = otherCar.getLongitude();
         double angle = Math.acos(dirLon / Math.sqrt(dirLat*dirLat + dirLon*dirLon));
 
+//        double otherLat = 1.0;
+//        double otherLon = -1 * Math.sqrt(3);
         otherLat = otherLat - myCar.getLatitude();
         otherLon = otherLon - myCar.getLongitude();
 
@@ -28,6 +35,10 @@ public class Angle {
     public String getAngleWithOtherCar() {
         double angle = Math.toDegrees(calcAngle());
         String angleWithOtherCar;
+
+        Log.e("Angle", String.valueOf(angle));
+        Log.e("My Position", myCar.getLatitude() + " " + myCar.getLongitude() + " " + myCar.getDirLat() + myCar.getDirLon());
+        Log.e("Other Position", otherCar.getLatitude() + " " + otherCar.getLongitude());
 
         if(345 < angle && angle <= 15) angleWithOtherCar = "12시 방향";
         else if(15 < angle && angle <= 45) angleWithOtherCar = "1시 방향";
