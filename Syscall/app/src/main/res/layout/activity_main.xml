@@ -13,10 +13,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal|center_vertical"
+            android:layout_marginLeft="30dp"
+            android:gravity="center_vertical"
             android:text="사용자 등록"
             android:textSize="25dp"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 
@@ -36,7 +38,9 @@
             android:layout_weight="1.72"
             android:gravity="center_horizontal|center_vertical"
             android:text="자동차 브랜드"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:textColor="#000000"
+            android:textStyle="bold"/>
 
         <View
             android:layout_width="2dp"
@@ -72,7 +76,9 @@
             android:layout_weight="1.72"
             android:gravity="center_horizontal|center_vertical"
             android:text="분류"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:textColor="#000000"
+            android:textStyle="bold"/>
 
         <View
             android:layout_width="2dp"
@@ -115,7 +121,9 @@
             android:layout_weight="1.72"
             android:gravity="center_horizontal|center_vertical"
             android:text="색상"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:textColor="#000000"
+            android:textStyle="bold"/>
 
         <View
             android:layout_width="2dp"
@@ -152,7 +160,9 @@
             android:layout_weight="1.5"
             android:gravity="center_horizontal|center_vertical"
             android:text="초보운전"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:textColor="#000000"
+            android:textStyle="bold"/>
 
         <View
             android:layout_width="2dp"
@@ -185,7 +195,9 @@
             android:layout_weight="1.5"
             android:gravity="center_horizontal|center_vertical"
             android:text="안경착용"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:textColor="#000000"
+            android:textStyle="bold"/>
 
         <View
             android:layout_width="2dp"
@@ -218,7 +230,9 @@
             android:layout_weight="1.72"
             android:gravity="center_horizontal|center_vertical"
             android:text="사용자 사진 등록여부"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:textColor="#000000"
+            android:textStyle="bold"/>
 
         <View
             android:layout_width="2dp"
@@ -296,7 +310,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="완료"/>
+            android:text="완료"
+            android:textSize="18dp"
+            android:textColor="#000000"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 

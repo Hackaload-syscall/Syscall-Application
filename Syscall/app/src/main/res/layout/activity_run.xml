@@ -15,7 +15,9 @@
             android:layout_weight="1.5"
             android:gravity="center_horizontal|center_vertical"
             android:text="위도"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:textColor="#000000"
+            android:textStyle="bold"/>
 
         <View
             android:layout_width="2dp"
@@ -50,7 +52,9 @@
             android:layout_weight="1.5"
             android:gravity="center_horizontal|center_vertical"
             android:text="경도"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:textColor="#000000"
+            android:textStyle="bold"/>
 
         <View
             android:layout_width="2dp"
@@ -68,40 +72,42 @@
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_centerInParent="true"
-        android:background="#BDBDBD" />
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:background="#BDBDBD" />-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2">
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="2">-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.5"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="가속도"
-            android:textSize="18dp"/>
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1.5"-->
+            <!--android:gravity="center_horizontal|center_vertical"-->
+            <!--android:text="가속도"-->
+            <!--android:textSize="18dp"-->
+            <!--android:textColor="#000000"-->
+            <!--android:textStyle="bold"/>-->
 
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="#BDBDBD"/>
+        <!--<View-->
+            <!--android:layout_width="2dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="#BDBDBD"/>-->
 
-        <TextView
-            android:id="@+id/textView_accel"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="Null"
-            android:textSize="18dp" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView_accel"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center_horizontal|center_vertical"-->
+            <!--android:text="Null"-->
+            <!--android:textSize="18dp" />-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
     <View
         android:layout_width="match_parent"
@@ -120,7 +126,9 @@
             android:layout_weight="1.5"
             android:gravity="center_horizontal|center_vertical"
             android:text="속도"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:textColor="#000000"
+            android:textStyle="bold"/>
 
         <View
             android:layout_width="2dp"
@@ -155,7 +163,9 @@
             android:layout_weight="1.5"
             android:gravity="center_horizontal|center_vertical"
             android:text="방향"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:textColor="#000000"
+            android:textStyle="bold"/>
 
         <View
             android:layout_width="2dp"
@@ -182,7 +192,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="0.8">
 
         <SurfaceView
             android:id="@+id/surfaceView_runCamera"
@@ -204,7 +214,9 @@
             android:layout_weight="1.5"
             android:gravity="center_horizontal|center_vertical"
             android:text="설정 변경"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:textColor="#000000"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 
