@@ -15,7 +15,8 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal|center_vertical"
             android:text="사용자 등록"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:textColor="#000000"/>
 
     </LinearLayout>
 

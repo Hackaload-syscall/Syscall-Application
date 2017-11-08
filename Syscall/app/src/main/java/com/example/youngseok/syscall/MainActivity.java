@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         makeClassificationList();
         makeColorList();
 
-        TextView textViewAndroidID = (TextView) findViewById(R.id.textView_androidID);
         textViewIsEnroll = (TextView) findViewById(R.id.textview_isEnroll);
 
         Spinner spinnerBrand = (Spinner) findViewById(R.id.spinner_brand);
@@ -64,8 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         CheckBox checkBoxStarter = (CheckBox) findViewById(R.id.checkbox_starter);
         CheckBox checkBoxGlasses = (CheckBox) findViewById(R.id.checkbox_glasses);
-
-        textViewAndroidID.setText(SplashActivity.serverID);
 
         if(isEnroll) {
             textViewIsEnroll.setText("등록");
