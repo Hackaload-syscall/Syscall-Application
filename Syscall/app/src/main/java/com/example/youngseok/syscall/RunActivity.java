@@ -1,28 +1,53 @@
 package com.example.youngseok.syscall;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
+import android.os.Environment;
 import android.os.Message;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.SurfaceView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.CameraBridgeViewBase;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.LinkedList;
 import java.util.List;
 
-public class RunActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
+import static com.example.youngseok.syscall.CameraActivity.PERMISSIONS_REQUEST_CODE;
+
+public class RunActivity extends AppCompatActivity
+        implements TextToSpeech.OnInitListener, CameraBridgeViewBase.CvCameraViewListener2 {
 
     String []brandArr = { "현대", "기아", "쌍용", "르노", "쉐보레", "혼다", "도요타", "렉서스", "닛싼", "인피니티",
                           "비엠떠블유", "아우디", "벤츠", "포르쉐", "재규어", "포드", "푸조", "캐딜락", "폭스바겐", "테슬라" };
@@ -38,6 +63,16 @@ public class RunActivity extends AppCompatActivity implements TextToSpeech.OnIni
     List<OtherCar> otherCarsList = new LinkedList<>();
 
     String myJSON;
+    /* Hwancheol : declaring variables and functions */
+    static {
+        System.loadLibrary("opencv_java3");
+        System.loadLibrary("native-lib");
+    }
+    private CameraBridgeViewBase mOpenCvCameraView;
+    private Mat matInput;
+    private Mat matResult;
+    /* Hwancheol End */
+
 
     double prevLat, prevLon, curLat, curLon, dirLat, dirLon;
     double curVelocity;
@@ -57,7 +92,20 @@ public class RunActivity extends AppCompatActivity implements TextToSpeech.OnIni
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
+        /* Hwancheol : Connecting Camera to CV */
+        if (!hasPermissions(PERMISSIONS)) {
+            requestPermissions(PERMISSIONS, PERMISSIONS_REQUEST_CODE);
+        }
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        mOpenCvCameraView = (CameraBridgeViewBase)findViewById(R.id.realtime_camera_view);
+        mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
+        mOpenCvCameraView.setCvCameraViewListener(this);
+        mOpenCvCameraView.setCameraIndex(1); // front-camera(1),  back-camera(0)
+        //mOpenCvCameraView.setMaxFrameSize(270, 480);
+        mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+        /* Hwancheol End */
         flag = true;
 
         myTTS = new TextToSpeech(this, this);
@@ -83,7 +131,7 @@ public class RunActivity extends AppCompatActivity implements TextToSpeech.OnIni
             }
         });
 
-        runThreads();
+       runThreads();
     }
 
     @Override
@@ -101,6 +149,13 @@ public class RunActivity extends AppCompatActivity implements TextToSpeech.OnIni
     @Override
     public void onResume() {
         super.onResume();
+        if (!OpenCVLoader.initDebug()) {
+            //Log.d(TAG, "onResume :: Internal OpenCV library not found.");
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_2_0, this, mLoaderCallback);
+        } else {
+            //Log.d(TAG, "onResum :: OpenCV library found inside package. Using it!");
+            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+        }
     }
 
     @Override
@@ -132,6 +187,10 @@ public class RunActivity extends AppCompatActivity implements TextToSpeech.OnIni
                 Double.toString(0),
                 String.valueOf(0),
                 String.valueOf(0));
+        /* Hwancheol */
+        if (mOpenCvCameraView != null)
+            mOpenCvCameraView.disableView();
+        /* Hwancheol End */
     }
 
     private final LocationListener locationListener = new LocationListener() {
@@ -190,7 +249,7 @@ public class RunActivity extends AppCompatActivity implements TextToSpeech.OnIni
 
                 Log.d("Velocity", prevVelocity + " " + curVelocity);
 
-                if(curVelocity < prevVelocity + 20) {
+                if(curVelocity < prevVelocity + 0) {
                     dirLat = directionVector.getDirectionLat() * 100000;
                     dirLon = directionVector.getDirectionLon() * 100000;
 
@@ -370,4 +429,118 @@ public class RunActivity extends AppCompatActivity implements TextToSpeech.OnIni
             e.printStackTrace();
         }
     }
+    /* Hwancheol : Implementing Functions */
+    @Override
+    public void onCameraViewStarted(int width, int height) {
+
+    }
+
+    @Override
+    public void onCameraViewStopped() {
+
+    }
+
+    @Override
+    public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
+
+        matInput = inputFrame.rgba();
+
+        if ( matResult != null ) matResult.release();
+        matResult = new Mat(matInput.rows(), matInput.cols(), matInput.type());
+        Mat matInputT = new Mat(matInput.rows(), matInput.cols(), matInput.type());
+        Mat matInputF = new Mat(matInput.rows(), matInput.cols(), matInput.type());
+
+        Core.transpose(matInput, matInputT);
+        Imgproc.resize(matInputT, matInputF, matInputF.size(), 270, 480, 0);
+        Core.flip(matInputF, matInput, -1);
+
+        return matInput;
+    }
+    public BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
+        @Override
+        public void onManagerConnected(int status) {
+            switch (status) {
+                case LoaderCallbackInterface.SUCCESS:
+
+                {
+                    mOpenCvCameraView.enableView();
+                } break;
+                default:
+                {
+                    super.onManagerConnected(status);
+                } break;
+            }
+        }
+    };
+    /* Hwancheol End*/
+
+    /* Request Permissions */
+    static final int PERMISSIONS_REQUEST_CODE = 1000;
+    //String[] PERMISSIONS  = {"android.permission.CAMERA"};
+    String[] PERMISSIONS  = {"android.permission.CAMERA",
+            "android.permission.WRITE_EXTERNAL_STORAGE"};
+
+    private boolean hasPermissions(String[] permissions) {
+        int result;
+
+        for (String perms : permissions){
+
+            result = ContextCompat.checkSelfPermission(this, perms);
+
+            if (result == PackageManager.PERMISSION_DENIED){
+
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch(requestCode){
+
+            case PERMISSIONS_REQUEST_CODE:
+                if (grantResults.length > 0) {
+                    boolean cameraPermissionAccepted = grantResults[0]
+                            == PackageManager.PERMISSION_GRANTED;
+
+                    boolean writePermissionAccepted = grantResults[1]
+                            == PackageManager.PERMISSION_GRANTED;
+
+                    if (!cameraPermissionAccepted || !writePermissionAccepted) {
+                        showDialogForPermission("앱을 실행하려면 퍼미션을 허가하셔야합니다.");
+                        return;
+                    }
+                }
+                break;
+        }
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private void showDialogForPermission(String msg) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder( RunActivity.this);
+        builder.setTitle("Alert");
+        builder.setMessage(msg);
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id){
+                requestPermissions(PERMISSIONS, PERMISSIONS_REQUEST_CODE);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                finish();
+            }
+        });
+        builder.create().show();
+    }
+    /* Hwancheol End */
 }

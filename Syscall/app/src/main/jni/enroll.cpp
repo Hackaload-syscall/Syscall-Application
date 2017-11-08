@@ -51,6 +51,31 @@ Java_com_example_youngseok_syscall_CameraActivity_loadCascade(JNIEnv *env, jclas
 
     return ret;
 }
+//
+//JNIEXPORT jlong JNICALL
+//Java_com_example_youngseok_syscall_RunActivity_loadCascade(JNIEnv *env, jclass type,
+//                                                              jstring cascadeFileName_) {
+//    const char *nativeFileNameString = env->GetStringUTFChars(cascadeFileName_, 0);
+//
+//    string baseDir("/storage/emulated/0/");
+//    baseDir.append(nativeFileNameString);
+//    const char *pathDir = baseDir.c_str();
+//
+//    jlong ret = 0;
+//    ret = (jlong) new CascadeClassifier(pathDir);
+//    if (((CascadeClassifier *) ret)->empty()) {
+//        __android_log_print(ANDROID_LOG_DEBUG, "native-lib :: ",
+//                            "CascadeClassifier로 로딩 실패  %s", nativeFileNameString);
+//    } else
+//        __android_log_print(ANDROID_LOG_DEBUG, "native-lib :: ",
+//                            "CascadeClassifier로 로딩 성공 %s", nativeFileNameString);
+//
+//
+//    env->ReleaseStringUTFChars(cascadeFileName_, nativeFileNameString);
+//
+//    return ret;
+//}
+
 
 
 float resize(Mat img_src, Mat &img_resize, int resize_width) {

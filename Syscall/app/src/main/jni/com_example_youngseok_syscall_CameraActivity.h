@@ -4,11 +4,13 @@
 
 #ifndef _Included_com_example_youngseok_syscall_CameraActivity
 #define _Included_com_example_youngseok_syscall_CameraActivity
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 #undef com_example_youngseok_syscall_CameraActivity_PERMISSIONS_REQUEST_CODE
 #define com_example_youngseok_syscall_CameraActivity_PERMISSIONS_REQUEST_CODE 1000L
+
 /*
  * Class:     com_example_youngseok_syscall_CameraActivity
  * Method:    ConvertRGBtoGray
@@ -19,6 +21,10 @@ JNIEXPORT void JNICALL Java_com_example_youngseok_syscall_CameraActivity_Convert
 JNIEXPORT jlong JNICALL
 Java_com_example_youngseok_syscall_CameraActivity_loadCascade(JNIEnv *env, jclass type,
                                                                   jstring cascadeFileName_);
+
+//JNIEXPORT jlong JNICALL
+//Java_com_example_youngseok_syscall_RunActivity_loadCascade(JNIEnv *env, jclass type,
+//        jstring cascadeFileName_);
 
 JNIEXPORT jint JNICALL
 Java_com_example_youngseok_syscall_CameraActivity_detect(JNIEnv *env, jclass type,

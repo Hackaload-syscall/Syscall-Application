@@ -141,6 +141,7 @@ public class CameraActivity extends AppCompatActivity
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
         mOpenCvCameraView.setCameraIndex(1); // front-camera(1),  back-camera(0)
+        mOpenCvCameraView.setMaxFrameSize(1080, 1920);
         mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
     }
 
@@ -148,8 +149,6 @@ public class CameraActivity extends AppCompatActivity
     public void onPause()
     {
         super.onPause();
-        if (mOpenCvCameraView != null)
-            mOpenCvCameraView.disableView();
     }
 
     @Override
@@ -217,7 +216,7 @@ public class CameraActivity extends AppCompatActivity
                 break;
         }
         if(completionRate == 100) {
-            eye_radius = getEyeRadius() / 34;
+            eye_radius = getEyeRadius() / 20;
             Log.d(TAG, "eye radius : "+ eye_radius);
             completionRate = 0;
             finish();
