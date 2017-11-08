@@ -19,6 +19,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.LinkedList;
 import java.util.List;
 
 public class RunActivity extends AppCompatActivity {
@@ -28,7 +32,9 @@ public class RunActivity extends AppCompatActivity {
 
     LocationManager locationManager;
 
-    List<OtherCar> otherCarsList;
+    List<OtherCar> otherCarsList = new LinkedList<>();
+
+    String myJSON;
 
     double prevLat, prevLon, curLat, curLon;
     double curVelocity;
@@ -175,6 +181,9 @@ public class RunActivity extends AppCompatActivity {
                             String.valueOf(directionVector.getDirectionLat() * 100000),
                             String.valueOf(directionVector.getDirectionLon() * 100000));
 
+                    GetOtherCarInfo getOtherCarInfo = new GetOtherCarInfo();
+                    getOtherCarInfo.execute("http://52.79.165.228/syscall/prac.php", SplashActivity.serverID);
+
                     prevVelocity = curVelocity;
                 }
             }
@@ -213,6 +222,59 @@ public class RunActivity extends AppCompatActivity {
         protected String getPostParameters(String... params) {
 
             return "ServerID=" + params[1] + "&Latitude=" + params[2] + "&Longitude=" + params[3] + "&Acceleration=" + params[4] + "&Direction_X=" + params[5] + "&Direction_Y=" + params[6];
+        }
+    }
+
+    class GetOtherCarInfo extends AccessServerDB {
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            super.onPostExecute(result);
+
+            myJSON = result;
+            getData();
+        }
+
+        @Override
+        protected String getPostParameters(String... params) { return "ServerID=" + params[1]; }
+    }
+
+    private void getData() {
+
+        try {
+
+            JSONObject jsonObj = new JSONObject(myJSON);
+            JSONArray jsonArray = jsonObj.getJSONArray("Info");
+
+            otherCarsList = new LinkedList<>();
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject c = jsonArray.getJSONObject(i);
+
+                otherCarsList.add(new OtherCar(
+                        Integer.parseInt(c.getString("Brand")),
+                        Integer.parseInt(c.getString("Classification")),
+                        Integer.parseInt(c.getString("Color")),
+                        Double.parseDouble(c.getString("Latitude")),
+                        Double.parseDouble(c.getString("Longitude")),
+                        Double.parseDouble(c.getString("Direction_X")),
+                        Double.parseDouble(c.getString("Direction_Y")),
+                        Integer.parseInt(c.getString("Beginner")),
+                        Integer.parseInt(c.getString("Drowsy"))
+                    )
+                );
+            }
+
+            for (OtherCar oc : otherCarsList) {
+                
+                Log.e("checkOtherCarList", String.valueOf(oc.getBrand()));
+            }
+
+        } catch(Exception e) {
+
+            e.printStackTrace();
         }
     }
 }

@@ -72,7 +72,7 @@ public abstract class AccessServerDB extends AsyncTask<String, Void, String> {
             }
 
             bufferedReader.close();
-            Log.e("JSON", stringBuilder.toString());
+//            Log.e("JSON", stringBuilder.toString());
 
             return stringBuilder.toString();
 
